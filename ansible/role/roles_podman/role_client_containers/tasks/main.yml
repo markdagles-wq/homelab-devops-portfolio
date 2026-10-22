@@ -1,0 +1,30 @@
+---
+- name: Zajistit instalaci podman-compose na serveru
+  become: true
+  apt:
+    name: podman-compose
+    state: present
+    update_cache: yes
+
+- name: Vytvořit adresář pro konkrétního klienta
+  file:
+    path: "/opt/clients/{{ client_name }}"
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: '0750'
+
+- name: Zkopírovat odpovídající docker-compose šablonu
+  template:
+    src: "docker-compose-{{ template_type }}.yml.j2"
+    dest: "/opt/clients/{{ client_name }}/docker-compose.yml"
+    owner: "root"
+    group: "root"
+    mode: '0640'
+
+- name: Spustit klientský kontejner přes podman-compose
+  shell: |
+    cd /opt/clients/{{ client_name }}
+    podman-compose up -d
+  register: compose_run
+  changed_when: compose_run.rc == 0

@@ -1,0 +1,48 @@
+---
+- name: Vytvořit kontejnerovou síť pro Traefik a klienty
+  containers.podman.podman_network:
+    name: client_bridge
+    state: present
+    internal: false
+
+- name: Vytvořit adresář pro Traefik bránu
+  file:
+    path: "/opt/traefik"
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: '0750'
+
+- name: Zkopírovat konfiguraci pro Traefik
+  copy:
+    content: |
+      api:
+        dashboard: true
+        insecure: true
+      entryPoints:
+        web:
+          address: ":80"
+      providers:
+        docker:
+          endpoint: "unix:///var/run/docker.sock"
+          exposedByDefault: false
+    dest: "/opt/traefik/traefik.yml"
+
+- name: Zajistit, že běží Podman API socket
+  systemd:
+    name: podman.socket
+    state: started
+    enabled: yes
+
+- name: Spustit Traefik bránu
+  containers.podman.podman_container:
+    name: traefik_gateway
+    image: docker.io/library/traefik:v3.0
+    state: started
+    restart_policy: always
+    ports:
+      - "80:80"
+    volumes:
+      - /opt/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - /run/podman/podman.sock:/var/run/docker.sock:ro
+    network: "client_bridge"

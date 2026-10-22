@@ -1,0 +1,44 @@
+---
+- name: Vytvořit adresář pro řídicí plane automatizace
+  file:
+    path: "/opt/control_plane"
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: '0755'
+
+- name: Nainstalovat Flask pro Python dashboard
+  apt:
+    name: python3-flask
+    state: present
+
+- name: Zkopírovat automatizační Python skript na server
+  copy:
+    src: "control_plane.py"  # Předpokládá soubor v files/ lokální složce role, nebo ho sem můžeme dát jako inline obsah
+    dest: "/opt/control_plane/control_plane.py"
+    owner: "root"
+    group: "root"
+    mode: '0755'
+
+- name: Vytvořit systemd službu pro Control Plane
+  copy:
+    dest: "/etc/systemd/system/control-plane.service"
+    content: |
+      [Unit]
+      Description=Hosting Control Plane Dashboard
+      After=network.target podman.socket
+
+      [Service]
+      ExecStart=/usr/bin/python3 /opt/control_plane/control_plane.py
+      Restart=always
+      User=root
+
+      [Install]
+      WantedBy=multi-user.target
+
+- name: Povolit a spustit Control Plane službu
+  systemd:
+    name: control-plane.service
+    state: restarted
+    enabled: yes
+    daemon_reload: yes

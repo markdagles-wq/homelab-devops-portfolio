@@ -1,0 +1,42 @@
+# 1. SSH zabezpečení pro všechny
+- hosts: all:!legion
+  gather_facts: yes
+  become: true
+  roles:
+    - security_ssh
+  tasks:
+    - include_tasks: roles/security_ssh/tasks/report.yml
+
+# 2. Nastavení pro moderní stroje (VPN)
+- hosts: admin_stroje:k3s_servery:!legion
+  become: true
+  roles:
+    - base_security
+  tasks:
+    - include_tasks: roles/base_security/tasks/report.yml
+
+# 3. K3s servery - Hardening a Engine
+- hosts: k3s_servery:!legion
+  become: true
+  roles:
+    - 
+    - security_hardening
+  tasks:
+    - include_tasks: 
+    - include_tasks: 
+    - include_tasks: roles/security_hardening/tasks/report.yml
+    - include_role:
+        name: reporter
+
+# 4. Nastavení pro staré stroje (Thinkpad / G4)
+- hosts: stare_stroje:!legion
+  become: true
+  roles:
+    - base_security
+    - role: 
+      vars:
+        power_limit: 25000000
+  tasks:
+    - include_tasks: roles/base_security/tasks/report.yml
+    - include_tasks: 
+
