@@ -1,6 +1,6 @@
 # 🛠️ HomeLab, System Administration & Infrastructure Portfolio
 **Jméno a Příjmení**  
-📍 *Kontakt:* rewol@post.cz | +420 737 906 400 | GitHub: [Odkaz na GitHub]
+📍 *Kontakt:* rewol@post.cz | +420 737 906 400 | GitHub: [https://github.com/markdagles-wq/homelab-devops-portfolio]
 
 > 🔒 **Poznámka k repozitáři a soukromí:**  
 > Zde zveřejněné skripty a struktury slouží jako ukázka mého stylu programování, kontejnerizace a automatizace. Kompletní produkční Ansible role (včetně pokročilého LUKS/TPM šifrování disků), systémové konfigurační soubory a citlivé bezpečnostní vazby jsou z autorských důvodů neveřejné. **Rád vám je detailně předvedu a vysvětlím při osobním pohovoru.**
@@ -10,20 +10,33 @@
 ## 📂 Struktura tohoto repozitáře
 ```text
 homelab-devops-portfolio/
-├── README.md                          <-- Hlavní dokumentace a prezentace
+├── README.md                          <-- Hlavní dokumentace a portfolio
 ├── ai_hub/                            <-- AI Sandbox & Podman orchestrace
-│   ├── run.py                         <-- Orchestrační skript (build, volumes, porty)
+│   ├── run.py                         <-- Hlavní Python orchestrátor (cleanup, build, porty)
 │   └── core/
 │       └── engines/
-│           ├── finance_engine.py      <-- Python/Pandas parser dat z Excelu
-│           └── __init__.py
+│           ├── __init__.py
+│           └── finance_engine.py      <-- Pandas Excel parser a generátor metrik
 ├── ansible/                           <-- Infrastructure as Code (Ansible)
-│   ├── site.yml                       <-- Hlavní orchestrační playbook
+│   ├── site.yml                       <-- Hlavní orchestrace a přiřazení rolí
 │   └── role/
 │       └── roles_podman/
-│           ├── role_client_containers/ <-- Správa klientských prostředí (tasks, templates)
-│           ├── role_control_plane/     <-- Management & Dashboard backend
-│           └── role_traefik_gateway/   <-- Reversní proxy a sítě
+│           ├── role_client_containers/
+│           │   ├── tasks/
+│           │   │   └── main.yml       <-- Úlohy pro klientské kontejnery
+│           │   └── templates/
+│           │       ├── docker-compose-db.yml.j2
+│           │       ├── docker-compose-lemp.yml.j2
+│           │       ├── docker-compose-node.yml.j2
+│           │       └── docker-compose-python.yml.j2
+│           ├── role_control_plane/
+│           │   ├── files/
+│           │   │   └── control_plane.py <-- Flask dashboard a správa klientů
+│           │   └── tasks/
+│           │       └── main.yml       <-- Instalace a systemd služba pro control plane
+│           └── role_traefik_gateway/
+│               └── tasks/
+│                   └── main.yml       <-- Nasazení Traefik proxy a sítí
 └── scripts/                           <-- Vlastní systémové utility
     └── monitor_sluzeb.py              <-- CLI analýza RAM, procesů a interaktivní úklid
 
