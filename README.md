@@ -1,6 +1,6 @@
 # 🛠️ HomeLab, System Administration & Infrastructure Portfolio
 
-**Jméno a Příjmení**  
+**Jméno a Příjmení**  Václav Novotný
 📍 **Kontakt:** rewol@post.cz | +420 737 906 400  
 🔗 **GitHub:** https://github.com/markdagles-wq/homelab-devops-portfolio
 
@@ -59,159 +59,171 @@ Nepocházím z akademického IT prostředí ani nemám roky korporátní praxe.
 
 Vše, co umím, jsem si sám postavil, odlaďoval a vydřel v HomeLabu.
 
-    Žádné bezhlavé klikání:
+Žádné bezhlavé klikání:
 
-    Chci do hloubky rozumět fungování OS,
+Chci do hloubky rozumět fungování OS,
 
-    efektivní alokaci HW zdrojů,
+efektivní alokaci HW zdrojů,
 
-    zabezpečení dat na úrovni disků
+zabezpečení dat na úrovni disků
 
-    a kompletní automatizaci.
+a kompletní automatizaci.
 
-    Architektura nad syntaxí:
+Architektura nad syntaxí:
 
-    AI využívám jako efektivní nástroj pro psaní kódu (rychlé ruce),
+AI využívám jako efektivní nástroj pro psaní kódu (rychlé ruce),
 
-    ale celkovou architekturu, síťový design
+ale celkovou architekturu, síťový design
 
-    a logiku systému navrhuji a řídím sám.
+a logiku systému navrhuji a řídím sám.
 
-    Minimalismus & Nízká režie:
+Minimalismus & Nízká režie:
 
-    Preferuji čistý Debian CLI.
+Preferuji čistý Debian CLI.
 
-    Aplikace izoluji do venv a bezrootových kontejnerů.
+Aplikace izoluji do venv a bezrootových kontejnerů.
 
-    I na 32 GB RAM šetřím zdroje (Podman místo Dockeru,
+I na 32 GB RAM šetřím zdroje (Podman místo Dockeru,
 
-    podtaktování CPU pro úsporu energie, žádný balast).
+podtaktování CPU pro úsporu energie, žádný balast).
 
-    Bezpečnost na prvním místě:
+Bezpečnost na prvním místě:
 
-    Šifrování disků vázané na TPM2 čip,
+Šifrování disků vázané na TPM2 čip,
 
-    hardening SSH, izolace sítí a aplikací.
+hardening SSH, izolace sítí a aplikací.
 
 🖥️ 1. Hardware Tuning, Kernel & Bezpečnost
 
 (Debian / HP EliteDesk G4 / ThinkPad)
 
-    Hardware & BIOS:
+Hardware & BIOS:
 
-    Fyzická údržba (přepastování CPU),
+Fyzická údržba (přepastování CPU),
 
-    zamykání BIOSu heslem, správná alokace zdrojů.
+zamykání BIOSu heslem, správná alokace zdrojů.
 
-    LUKS + TPM2 Šifrování (Clevis):
+LUKS + TPM2 Šifrování (Clevis):
 
-    Automatické bezpečné odemykání NVMe disků
+Automatické bezpečné odemykání NVMe disků
 
-    vázané na TPM2 čip (PCR 7) s konfigurací crypttab
+vázané na TPM2 čip (PCR 7) s konfigurací crypttab
 
-    a obnovou initramfs. (Kód předvedu na pohovoru)
+a obnovou initramfs. (Kód předvedu na pohovoru)
 
-    Power Management & Limity:
+Power Management & Limity:
 
-    Vlastní systemd služba pro zamykání Intel RAPL Power Limitů,
+Vlastní systemd služba pro zamykání Intel RAPL Power Limitů,
 
-    governor schedutil a zastropování CPU na max 80 % pro úsporu wattů.
+governor schedutil a zastropování CPU na max 80 % pro úsporu wattů.
 
-    RAM & Memory Management:
+RAM & Memory Management:
 
-        Odstranění diskového LVM swapu a přechod na zRAM (zstd 25 %).
+   Odstranění diskového LVM swapu a přechod na zRAM (zstd 25 %).
 
-        Využití /tmp jako tmpfs přímo v RAM.
+   Využití /tmp jako tmpfs přímo v RAM.
 
-        Optimalizace kernelu pro AI zátěž přes 2MB Hugepages
+   Optimalizace kernelu pro AI zátěž přes 2MB Hugepages
 
-        a tuning vfs_cache_pressure.
+   a tuning vfs_cache_pressure.
 
-    I/O Schedulery:
+I/O Schedulery:
 
-    Cílené nastavení schedulerů (deadline pro NVMe, none pro SSD).
+Cílené nastavení schedulerů (deadline pro NVMe, none pro SSD).
 
 🤖 2. Infrastructure as Code & Orchestrace
 
 (Ansible & Podman)
 
-    Modularizované role (ansible/role/roles_podman/):
+Modularizované role (ansible/role/roles_podman/):
 
-    Dynamická distribuce konfigurace podle typu stroje (hosts / facts).
+Dynamická distribuce konfigurace podle typu stroje (hosts / facts).
 
-    SSH Hardening:
+SSH Hardening:
 
-    Vypnutí heslového přihlašování, změna portů, správa SSH klíčů.
+Vypnutí heslového přihlašování, změna portů, správa SSH klíčů.
 
-    Automation & Container Management:
+Automation & Container Management:
 
-    Automatické nasazování klientských prostředí přes podman-compose
+Automatické nasazování klientských prostředí přes podman-compose
 
-    do adresářové struktury /opt/clients/ s právy (0750 / 0640).
+do adresářové struktury /opt/clients/ s právy (0750 / 0640).
 
-    Traefik Gateway & Control Plane:
+Traefik Gateway & Control Plane:
 
-    Automatizované nasazování reversní proxy Traefik
+Automatizované nasazování reversní proxy Traefik
 
-    a správa klientských subdomén.
+a správa klientských subdomén.
 
-    Self-Healing / Log Monitoring:
+Self-Healing / Log Monitoring:
 
-    Vyhodnocování stavu kontejnerů (čtení logů přes tail -n 20)
+Vyhodnocování stavu kontejnerů (čtení logů přes tail -n 20)
 
-    s automatickým restartem v případě selhání.
+s automatickým restartem v případě selhání.
 
 🚀 3. Projekt: Finance AI Hub & Podman Sandbox
 
 Prototyp kontejnerizovaného finančního autopilota:
 
-    Runtime & Izolace (ai_hub/run.py):
+Runtime & Izolace (ai_hub/run.py):
 
-    Běží v Podmanu s orchestrací
+Běží v Podmanu s orchestrací
 
-    (cleanup, build, volume mounty).
+(cleanup, build, volume mounty).
 
-    Data Engine (ai_hub/core/engines/finance_engine.py):
+Data Engine (ai_hub/core/engines/finance_engine.py):
 
-    Parsování a čištění dat z Excel výkazů (finance.xlsx)
+Parsování a čištění dat z Excel výkazů (finance.xlsx)
 
-    pomocí pandas, generování JSON metrik a kontextu pro AI.
+pomocí pandas, generování JSON metrik a kontextu pro AI.
 
-    AI Engine & Guard Architecture:
+AI Engine & Guard Architecture:
 
-        Hlavní AI model (Qwen) na portu 8080 pro finanční analýzu.
+   Hlavní AI model (Qwen) na portu 8080 pro finanční analýzu.
 
-        Bezpečnostní Guard model (Phi-4) na portu 8081 pro validaci výstupů.
+   Bezpečnostní Guard model (Phi-4) na portu 8081 pro validaci výstupů.
 
-        PHP API Bridge pro komunikaci rozhraní s backendem.
+   PHP API Bridge pro komunikaci rozhraní s backendem.
 
 🌐 4. Síťová architektura, Auditing & Zálohy
 
-    Síť & Cloud Evolution:
+Síť & Cloud Evolution:
 
-    Přechod od Nginx proxy k čisté mesh síti přes Tailscale.
+Přechod od Nginx proxy k čisté mesh síti přes Tailscale.
 
-    Plánovaný přechod řízení webové prezentace do cloudu přes Terraform.
+Plánovaný přechod řízení webové prezentace do cloudu přes Terraform.
 
-    Emergency Alerting (SMS Bridge):
+Emergency Alerting (SMS Bridge):
 
-    Python skript pro kritické notifikace.
+Python skript pro kritické notifikace.
 
-    Propojení Debian serveru s Android/Termux zařízením
+Propojení Debian serveru s Android/Termux zařízením
 
-    přes SSH tunel v Tailscale / ADB fallback pro 100% doručení SMS.
+přes SSH tunel v Tailscale / ADB fallback pro 100% doručení SMS.
 
-    System & Code Audit (ark_audit.py):
+System & Code Audit (ark_audit.py):
 
-    Vlastní Python skener pro hloubkovou kontrolu adresářů
+Vlastní Python skener pro hloubkovou kontrolu adresářů
 
-    a generování manifestů závislostí (pip, apt, systémové binárky).
+a generování manifestů závislostí (pip, apt, systémové binárky).
 
-    RAM & Process Monitor (scripts/monitor_sluzeb.py):
+RAM & Process Monitor (scripts/monitor_sluzeb.py):
 
-    CLI nástroj v Pythonu s barevným rozlišením spotřeby RAM podle procesů
+CLI nástroj v Pythonu s barevným rozlišením spotřeby RAM podle procesů
 
-    a detekcí zbytečných služeb (tumblerd, tracker-miner) s možností ukončení.
+a detekcí zbytečných služeb (tumblerd, tracker-miner) s možností ukončení.
+
+🔒 Integrita kódu & Supply Chain Security
+
+Pro zajištění maximální transparentnosti a integrity kódu v tomto repozitáři 
+
+využívám vestavěný verifikační skript pro generování SHA-256 manifestů. 
+
+Zabraňuje jakékoliv neautorizované modifikaci struktury.
+
+    Generování manifestu: python3 hash_generator.py
+
+    Ověření integrity souborů: sha256sum -c manifest.sha256
 
 💡 Proč reaguji na tuto pozici?
 
