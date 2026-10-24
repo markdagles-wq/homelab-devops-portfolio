@@ -17,13 +17,13 @@
 ---
 
 #### 2. CLI Analýza & Správa procesů: `scripts/monitor_sluzeb.py`
-[![Monitor služeb Demo](https://img.youtube.com/vi/ID_VIDEA_2/maxresdefault.jpg)](https://youtu.be/ID_VIDEA_2)
+[![Monitor služeb Demo](https://img.youtube.com/vi/watch?v=V-Lv1OOfGRc/maxresdefault.jpg)](https://youtu.be/watch?v=V-Lv1OOfGRc)
 *▶️ Kliknutím přehrajete demonstraci analýzy RAM a interaktivního úklidu*
 
 ---
 
 #### 3. Systémová diagnostika: `scripts/ark_sys_health.py`
-[![Sys Health Demo](https://img.youtube.com/vi/ID_VIDEA_3/maxresdefault.jpg)](https://youtu.be/ID_VIDEA_3)
+[![Sys Health Demo](https://img.youtube.com/vi/watch?v=_V8-E2RFi0w/maxresdefault.jpg)](https://youtu.be/watch?v=_V8-E2RFi0w)
 *▶️ Kliknutím přehrajete reálnou diagnostiku a health-check systému*
 
 ---
