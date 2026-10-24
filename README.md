@@ -6,6 +6,28 @@
 
 ---
 
+### 🎥 Ukázky z terminálu (Silent Engineering Demos)
+
+> *Všechna videa jsou koncipována jako tiché vizuální demonstrace funkčnosti kódu s úvodními titulky.*
+
+#### 1. Architektura & AI Hub Sandbox
+[![Project Echo Demo](https://img.youtube.com/vi/ID_VIDEA_1/maxresdefault.jpg)](https://youtu.be/ID_VIDEA_1)
+*▶️ Kliknutím přehrajete ukázku spuštění AI Hubu a orchestrace*
+
+---
+
+#### 2. CLI Analýza & Správa procesů: `scripts/monitor_sluzeb.py`
+[![Monitor služeb Demo](https://img.youtube.com/vi/ID_VIDEA_2/maxresdefault.jpg)](https://youtu.be/ID_VIDEA_2)
+*▶️ Kliknutím přehrajete demonstraci analýzy RAM a interaktivního úklidu*
+
+---
+
+#### 3. Systémová diagnostika: `scripts/ark_sys_health.py`
+[![Sys Health Demo](https://img.youtube.com/vi/ID_VIDEA_3/maxresdefault.jpg)](https://youtu.be/ID_VIDEA_3)
+*▶️ Kliknutím přehrajete reálnou diagnostiku a health-check systému*
+
+---
+
 ### 🔒 Poznámka k repozitáři a soukromí
 Zde zveřejněné skripty a struktury slouží jako ukázka  
 mého stylu programování, kontejnerizace a automatizace.
@@ -19,7 +41,7 @@ důvodů neveřejné.
 
 ---
 
-## 📂 Struktura tohoto repozitáře
+### 📂 Struktura tohoto repozitáře a tiché video-ukázky
 
 ```text
 homelab-devops-portfolio/
@@ -51,7 +73,8 @@ homelab-devops-portfolio/
 │               └── tasks/
 │                   └── main.yml       <-- Nasazení Traefik proxy a sítí
 └── scripts/                           <-- Vlastní systémové utility
-    └── monitor_sluzeb.py              <-- CLI analýza RAM, procesů a interaktivní úklid
+    ├── monitor_sluzeb.py              <-- CLI analýza RAM, procesů a interaktivní úklid
+    └── ark_sys_health.py              <-- Pokročilý systémový health-check & diagnostika
     
 🎯 O mně & Moje IT filozofie
 
@@ -213,30 +236,30 @@ CLI nástroj v Pythonu s barevným rozlišením spotřeby RAM podle procesů
 
 a detekcí zbytečných služeb (tumblerd, tracker-miner) s možností ukončení.
 
-🔒 Integrita kódu & Supply Chain Security
+🔒 5. Integrita kódu & Supply Chain Security
 
-Pro zajištění maximální transparentnosti a integrity kódu v tomto repozitáři 
+    Kryptografická verifikace: Pro zajištění maximální transparentnosti a 
+    
+    integrity kódu využívám vestavěný skript pro generování SHA-256 manifestů. 
+    
+    Zabraňuje neautorizované modifikaci struktury repozitáře.
 
-využívám vestavěný verifikační skript pro generování SHA-256 manifestů. 
+        Generování manifestu: python3 hash_generator.py
 
-Zabraňuje jakékoliv neautorizované modifikaci struktury.
+        Ověření integrity: sha256sum -c manifest.sha256
 
-    Generování manifestu: python3 hash_generator.py
+🔒 Poznámka k soukromí & Kontakt
 
-    Ověření integrity souborů: sha256sum -c manifest.sha256
+Zde zveřejněné skripty a struktury slouží jako demonstrace mého stylu programování,
 
-💡 Proč reaguji na tuto pozici?
+      kontejnerizace a automatizace. Kompletní produkční Ansible role 
+ 
+ a citlivé konfigurace jsou z autorských důvodů neveřejné.
 
-Vaše nabídka mě zaujala pestrou kombinací technologií
+Rád vám kompletní architekturu předvedu a detailně vysvětlím při osobním pohovoru.
 
-(Linux, Windows, MikroTik, Virtualizace, Open-source).
+✉️ Email: rewol@post.cz
 
-Hledám prostředí, kde mohu okamžitě pomáhat uživatelům na IT supportu
+📞 Telefon: +420 737 906 400
 
-a zároveň postupně přebírat složitější úkoly v oblasti správy serverů,
-
-sítí a automatizace.
-
-Nabízím vysoké pracovně-technické nasazení, neustálou chuť se učit
-
-a schopnost dotahovat věci do funkčního konce.    
+🌐 GitHub Profile: markdagles-wq
