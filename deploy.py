@@ -4,11 +4,19 @@ import sys
 import re
 from datetime import datetime
 
-# Zjednodušené a bezpečné vzory, které netestují samy sebe
+# Seznam cca 10+ vzorů pro detekci citlivých dat a parametrů
 SENSITIVE_PATTERNS = [
-    r"BEGIN\s+PRIVATE\s+KEY",          # SSH / TLS Privátní klíče
-    r"api[_-]?key\s*=\s*['\"].+['\"]",     # API klíče
-    r"password\s*=\s*['\"].+['\"]",       # Natvrdo napsaná hesla
+    r"BEGIN\s+PRIVATE\s+KEY",                  # 1. SSH / TLS Privátní klíče
+    r"api[_-]?key\s*=\s*['\"].+['\"]",             # 2. API klíče
+    r"password\s*=\s*['\"].+['\"]",               # 3. Natvrdo napsaná hesla
+    r"secret[_-]?key\s*=\s*['\"].+['\"]",         # 4. Tajné klíče
+    r"passwd\s*=\s*['\"].+['\"]",                 # 5. Alternativa pro heslo
+    r"authorization\s*:\s*bearer\s+[a-zA-Z0-9]",  # 6. Autorizační tokeny (Bearer)
+    r"mongodb(?:\+srv)?://[^\s]+",                # 7. Databázové připojení MongoDB
+    r"postgres(?:ql)?://[^\s]+",                  # 8. Databázové připojení PostgreSQL
+    r"mysql://[^\s]+",                            # 9. Databázové připojení MySQL
+    r"jwt[_-]?token\s*=\s*['\"].+['\"]",          # 10. JWT Tokeny
+    r"aws_[a-z_]+_key\s*=\s*['\"].+['\"]",        # 11. AWS klíče
 ]
 
 def run_cmd(cmd):
@@ -20,14 +28,15 @@ def check_security():
     """Bezpečnostní kontrola neuložených změn před commitem."""
     print("[*] Procházím bezpečnostní kontrolou (Security Check)...")
     
-    # 1. Zkontrolujeme git diff (upravené soubory)
     code, diff, _ = run_cmd("git diff")
-    
-    # 2. Zkontrolujeme i obsah nově přidaných (neignorovaných) souborů
     code_stat, untracked, _ = run_cmd("git ls-files --others --exclude-standard")
+    
     untracked_content = ""
     if untracked:
         for f in untracked.splitlines():
+            # Nechceme kontrolovat samotný deploy.py nebo skryté git soubory
+            if f == "deploy.py" or f.startswith(".git"):
+                continue
             try:
                 with open(f, "r", encoding="utf-8", errors="ignore") as file:
                     untracked_content += file.read() + "\n"
@@ -39,7 +48,7 @@ def check_security():
     for pattern in SENSITIVE_PATTERNS:
         if re.search(pattern, total_check_text, re.IGNORECASE):
             print("\n" + "🚨" * 20)
-            print(f"[BEZPEČNOSTNÍ CHYBA] Zjištěn potenciální únik citlivých dat! (Vzor: {pattern})")
+            print(f"[BEZPEČNOSTNÍ CHYBA] Zjištěn únik citlivých dat! (Odpovídající vzor: {pattern})")
             print("Deploy byl z bezpečnostních důvodů ZASTAVEN.")
             print("🚨" * 20 + "\n")
             return False
@@ -52,6 +61,12 @@ def main():
     print("🚀 AUTOMATICKÝ DEPLOY NA GITHUB")
     print("=" * 60)
 
+    # Zjištění, zda uživatel chce vypnout bezpečnostní kontrolu
+    skip_check = "--no-check" in sys.argv or "--skip-security" in sys.argv
+    if skip_check:
+        print("[⚠️ VAROVÁNÍ] Bezpečnostní kontrola je pro tento běh VYPNUTA (--no-check).")
+        print("-" * 60)
+
     # 1. Kontrola stavu depozitáře
     code, out, _ = run_cmd("git status --porcelain")
     if not out:
@@ -62,9 +77,12 @@ def main():
     print(out)
     print("-" * 60)
 
-    # 2. Bezpečnostní kontrola obsahu
-    if not check_security():
-        sys.exit(1)
+    # 2. Bezpečnostní kontrola (pokud není vypnutá)
+    if not skip_check:
+        if not check_security():
+            print("\n[TIP] Pokud chceš kontrolu jednorázově přeskočit, spuštění proveď příkazem:")
+            print("      python3 deploy.py --no-check\n")
+            sys.exit(1)
 
     # 3. Přidání souborů
     print("[*] Přidávám změny (git add .)...")

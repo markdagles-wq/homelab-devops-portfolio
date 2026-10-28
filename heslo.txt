@@ -1,0 +1,13 @@
+# TESTOVACÍ SOUBOR PRO OVĚŘENÍ BEZPEČNOSTNÍCH KONTROL
+# Zkoušej mazat jednotlivé řádky a pouštět python3 deploy.py, abys viděl, že skript reaguje.
+
+password = "super_tajne_heslo_123"
+secret_key = "moje-tajne-zakkodovane-zazemi"
+api_key = "AIzaSyTestApiKey123456789"
+passwd = "nejake-dalsi-heslo"
+authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.testtoken
+mongodb://uzivatel:heslo123@cluster0.mongodb.net/db?retryWrites=true
+postgres://admin:secretpassword@localhost:5432/production_db
+mysql://root:rootpassword@127.0.0.1:3306/app_db
+jwt_token = "eyJhbGciOiJIUzI1Ni..."
+aws_access_key_id = "AKIAIOSFODNN7EXAMPLE"

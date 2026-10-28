@@ -18,6 +18,8 @@
 # 3. K3s servery - Hardening a Engine
 - hosts: k3s_servery:!legion
   become: true
+  vars:
+    db_password: "super_secret_database_password_123"  # <-- Tohle tu být nesmí!
   roles:
     - 
     - security_hardening
