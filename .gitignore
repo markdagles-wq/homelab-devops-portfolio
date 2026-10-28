@@ -1,0 +1,13 @@
+# Citlivé soubory a klíče
+*.env
+*.pem
+*.key
+id_rsa*
+*.vault
+secrets/
+config.private.yml
+
+# Logy a dočasné soubory
+*.log
+__pycache__/
+.DS_Store
