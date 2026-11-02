@@ -65,9 +65,9 @@ Integrity & Deploy Automation
 
 🔒 Poznámka & Kontakt
 
-    Zveřejněné skripty slouží jako demonstrace mého stylu práce, kontejnerizace a automatizace. Kompletní produkční role a citlivé konfigurace jsou z bezpečnostních důvodů neveřejné.
-
-    Rád vám celou architekturu detailně představím a vysvětlím při osobním pohovoru.
+    Zveřejněné skripty slouží jako demonstrace mého stylu práce, kontejnerizace a automatizace. Kompletní produkční role a citlivé konfigurace 
+    
+    jsou z bezpečnostních důvodů neveřejné. Rád vám celou architekturu detailně představím a vysvětlím při osobním pohovoru.
 
     ✉️ Email: rewol@post.cz
 
