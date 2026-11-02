@@ -60,7 +60,7 @@ def check_security():
     return True
 
 def update_readme_videos():
-    """Přečte videos.json, zkontroluje platnost ID a bezpečně vygeneruje README.md bez rozbití."""
+    """Přečte videos.json a bezpečně vygeneruje README.md bez prázdných mezer u připravovaných videí."""
     print("[*] Aktualizuji sekci videí v README.md...")
     json_path = Path("videos.json")
     readme_path = Path("README.md")
@@ -81,7 +81,6 @@ def update_readme_videos():
 
     html_lines = []
 
-    # Pomocná funkce pro detekci placeholderů (zda jde o reálné YouTube ID)
     def is_placeholder(vid_id):
         if not vid_id or "ID_" in vid_id or "SEM_DAL" in vid_id or len(vid_id) < 5:
             return True
@@ -98,7 +97,7 @@ def update_readme_videos():
     
     if is_placeholder(l_id):
         html_lines.append(f"> ⏳ **Stav:** *Tato ukázka se připravuje (reálné video bude brzy doplněno).*")
-        html_lines.append(f"- *{l_desc}*")
+        html_lines.append(f"> \n> *{l_desc}*")
     else:
         html_lines.append(f"[![Demo](https://img.youtube.com/vi/{l_id}/mqdefault.jpg)](https://youtu.be/{l_id})")
         html_lines.append(f"- *{l_desc}*")
@@ -125,9 +124,9 @@ def update_readme_videos():
                 title = v.get("title", "Video ukázka")
                 
                 if is_placeholder(vid_id):
-                    html_lines.append(f"- **{title}:** *[Připravuje se]*\n")
+                    html_lines.append(f"- **{title}:** ⏳ *Připravuje se*")
                 else:
-                    html_lines.append(f"- **{title}:**\n")
+                    html_lines.append(f"- **{title}:**")
                     html_lines.append(f"  [![Demo](https://img.youtube.com/vi/{vid_id}/mqdefault.jpg)](https://youtu.be/{vid_id})\n")
                 
             html_lines.append("</details>\n")
@@ -144,7 +143,7 @@ def update_readme_videos():
         after_start = parts[1].split(end_tag)[1]
         new_readme = parts[0] + start_tag + "\n\n" + generated_content + "\n" + end_tag + after_start
         readme_path.write_text(new_readme, encoding="utf-8")
-        print("[OK] README.md bylo úspěšně aktualizováno s ošetřením placeholderů.")
+        print("[OK] README.md bylo úspěšně aktualizováno.")
     else:
         print("[VAROVÁNÍ] Značky pro videa v README.md nebyly nalezeny.")
 
