@@ -56,8 +56,7 @@ homelab-devops-portfolio/
 * 📦 **IaC & Orchestrace:** Modularizované Ansible role, bezrootový Podman (`/opt/clients/`) 
       + reverzní proxy Traefik.
 
-<details>
-<summary><b>🛠️ Zobrazit kompletní technickou specifikaci & detaily konfigurace</b></summary>
+🛠️ Zobrazit kompletní technickou specifikaci & detaily konfigurace
 
 #### Hardware, Kernel & Bezpečnost
 * **Hardware Tuning:** Běží na HP EliteDesk G4 / ThinkPad, fyzický tuning a BIOS hardening.
@@ -74,8 +73,6 @@ homelab-devops-portfolio/
 #### Integrity & Deploy Automation
 * **`deploy.py`:** Python utilita pro skenování diffu a zamezení úniku klíčů/hesel.
 * **Integrity Manifest:** SHA-256 hashovací brána garantující neporušenost souborů při přenosu.
-
-</details>
 
 ---
 
