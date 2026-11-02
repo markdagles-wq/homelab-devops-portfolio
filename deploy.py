@@ -60,7 +60,7 @@ def check_security():
     return True
 
 def update_readme_videos():
-    """Přečte videos.json a vygeneruje README.md v přesně zachovaném původním designu."""
+    """Přečte videos.json a bezpečně vygeneruje README.md bez chyb v zobrazení miniatur."""
     print("[*] Aktualizuji sekci videí v README.md...")
     json_path = Path("videos.json")
     readme_path = Path("README.md")
@@ -81,7 +81,7 @@ def update_readme_videos():
 
     html_lines = []
 
-    # 1. První video v JSONu = Nejnovější přidaná ukázka nahoře (původní styl s textovým odkazem)
+    # 1. Nejnovější video nahoře
     latest = videos[0]
     l_id = latest.get("id")
     l_title = latest.get("title", "Video ukázka")
@@ -93,7 +93,7 @@ def update_readme_videos():
     html_lines.append(f"- *{l_desc}*")
     html_lines.append("</details>\n")
 
-    # 2. Všechna zbývající videa = Starší / Základní video-ukázky dole s miniaturami
+    # 2. Starší / Základní video-ukázky dole v jedné roletce
     remaining_videos = videos[1:]
     if remaining_videos:
         html_lines.append("<details>")
@@ -102,7 +102,8 @@ def update_readme_videos():
         for v in remaining_videos:
             vid_id = v.get("id")
             title = v.get("title", "Video ukázka")
-            html_lines.append(f"- **{title}:**\n")
+            # Tady generujeme název a hned na dalším řádku bez mezer miniaturu
+            html_lines.append(f"- **{title}:**")
             html_lines.append(f"  [![Demo](https://img.youtube.com/vi/{vid_id}/mqdefault.jpg)](https://youtu.be/{vid_id})\n")
             
         html_lines.append("</details>\n")
@@ -119,10 +120,9 @@ def update_readme_videos():
         after_start = parts[1].split(end_tag)[1]
         new_readme = parts[0] + start_tag + "\n\n" + generated_content + "\n" + end_tag + after_start
         readme_path.write_text(new_readme, encoding="utf-8")
-        print("[OK] README.md bylo úspěšně aktualizováno do původního designu.")
+        print("[OK] README.md bylo úspěšně aktualizováno.")
     else:
         print("[VAROVÁNÍ] Značky pro videa v README.md nebyly nalezeny.")
-
 def generate_hash_manifest():
     """Automaticky vygeneruje/aktualizuje SHA-256 manifest všech souborů před deployem."""
     print("[*] Generuji aktuální SHA-256 manifest projektových souborů...")

@@ -41,19 +41,15 @@ homelab-devops-portfolio/
 <summary><b>📂 Starší / Základní video-ukázky (Klikni pro rozbalení)</b></summary>
 
 - **CLI Analýza RAM (scripts/monitor_sluzeb.py):**
-
   [![Demo](https://img.youtube.com/vi/V-Lv1OOfGRc/mqdefault.jpg)](https://youtu.be/V-Lv1OOfGRc)
 
 - **Systémová diagnostika (scripts/ark_sys_health.py):**
-
   [![Demo](https://img.youtube.com/vi/_V8-E2RFi0w/mqdefault.jpg)](https://youtu.be/_V8-E2RFi0w)
 
 - **Modularizované Ansible role pro Podman kontejnerizaci:**
-
   [![Demo](https://img.youtube.com/vi/SEM_DAL_ID_ANSIBLE/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_ANSIBLE)
 
 - **Control Plane Dashboard & Správa klientů:**
-
   [![Demo](https://img.youtube.com/vi/SEM_DAL_ID_PHP_1/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_PHP_1)
 
 </details>
