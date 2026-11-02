@@ -60,7 +60,7 @@ def check_security():
     return True
     
 def update_readme_videos():
-    """Přečte videos.json a vygeneruje README.md s čistou strukturou bez rozbitých mezer."""
+    """Přečte videos.json a vygeneruje README.md pomocí stabilního HTML formátování."""
     print("[*] Aktualizuji sekci videí v README.md...")
     json_path = Path("videos.json")
     readme_path = Path("README.md")
@@ -93,18 +93,18 @@ def update_readme_videos():
     html_lines.append(f"- *{l_desc}*")
     html_lines.append("</details>\n")
 
-    # 2. Starší / Základní video-ukázky dole
+    # 2. Starší / Základní video-ukázky dole v stabilním HTML formátu
     remaining_videos = videos[1:]
     if remaining_videos:
         html_lines.append("<details>")
-        html_lines.append("<summary><b>📂 Starší / Základní video-ukázky (Klikni pro rozbalení)</b></summary>\n")
+        html_lines.append("<summary><b>📂 Starší / Základní video-ukázky (Klikni pro rozbalení)</b></summary><br>\n")
         
         for v in remaining_videos:
             vid_id = v.get("id")
             title = v.get("title", "Video ukázka")
-            # Tady vynecháme odrážku u obrázku, dám ho přímo pod název jako čistý řádek
-            html_lines.append(f"- **{title}**")
-            html_lines.append(f"  [![Demo](https://img.youtube.com/vi/{vid_id}/mqdefault.jpg)](https://youtu.be/{vid_id})\n")
+            # Použijeme čistý text s tagy, což GitHub parser zpracuje bezchybně
+            html_lines.append(f"<b>{title}</b><br>")
+            html_lines.append(f'<a href="https://youtu.be/{vid_id}"><img src="https://img.youtube.com/vi/{vid_id}/mqdefault.jpg" alt="{title}"></a><br><br>')
             
         html_lines.append("</details>\n")
 

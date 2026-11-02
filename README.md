@@ -38,20 +38,16 @@ homelab-devops-portfolio/
 </details>
 
 <details>
-<summary><b>📂 Starší / Základní video-ukázky (Klikni pro rozbalení)</b></summary>
+<summary><b>📂 Starší / Základní video-ukázky (Klikni pro rozbalení)</b></summary><br>
 
-- **CLI Analýza RAM (scripts/monitor_sluzeb.py)**
-  [![Demo](https://img.youtube.com/vi/V-Lv1OOfGRc/mqdefault.jpg)](https://youtu.be/V-Lv1OOfGRc)
-
-- **Systémová diagnostika (scripts/ark_sys_health.py)**
-  [![Demo](https://img.youtube.com/vi/_V8-E2RFi0w/mqdefault.jpg)](https://youtu.be/_V8-E2RFi0w)
-
-- **Modularizované Ansible role pro Podman kontejnerizaci**
-  [![Demo](https://img.youtube.com/vi/SEM_DAL_ID_ANSIBLE/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_ANSIBLE)
-
-- **Control Plane Dashboard & Správa klientů**
-  [![Demo](https://img.youtube.com/vi/SEM_DAL_ID_PHP_1/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_PHP_1)
-
+<b>CLI Analýza RAM (scripts/monitor_sluzeb.py)</b><br>
+<a href="https://youtu.be/V-Lv1OOfGRc"><img src="https://img.youtube.com/vi/V-Lv1OOfGRc/mqdefault.jpg" alt="CLI Analýza RAM (scripts/monitor_sluzeb.py)"></a><br><br>
+<b>Systémová diagnostika (scripts/ark_sys_health.py)</b><br>
+<a href="https://youtu.be/_V8-E2RFi0w"><img src="https://img.youtube.com/vi/_V8-E2RFi0w/mqdefault.jpg" alt="Systémová diagnostika (scripts/ark_sys_health.py)"></a><br><br>
+<b>Modularizované Ansible role pro Podman kontejnerizaci</b><br>
+<a href="https://youtu.be/SEM_DAL_ID_ANSIBLE"><img src="https://img.youtube.com/vi/SEM_DAL_ID_ANSIBLE/mqdefault.jpg" alt="Modularizované Ansible role pro Podman kontejnerizaci"></a><br><br>
+<b>Control Plane Dashboard & Správa klientů</b><br>
+<a href="https://youtu.be/SEM_DAL_ID_PHP_1"><img src="https://img.youtube.com/vi/SEM_DAL_ID_PHP_1/mqdefault.jpg" alt="Control Plane Dashboard & Správa klientů"></a><br><br>
 </details>
 
 <!-- VIDEOS_END -->
