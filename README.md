@@ -37,18 +37,20 @@ homelab-devops-portfolio/
 <details>
 <summary><b>🔴 Nejnovější přidaná ukázka: AI Hub Sandbox & Orchestrace (Klikni pro rozbalení)</b></summary>
 
-> ⏳ **Stav:** *Tato ukázka se připravuje (reálné video bude brzy doplněno).*
-> 
-> *Ukázka spuštění AI Hubu, kontejnerové orchestrace a datového enginu.*
+[![Project Echo Demo](https://img.youtube.com/vi/ID_NOVEHO_VIDEA/mqdefault.jpg)](https://youtu.be/ID_NOVEHO_VIDEA)
+- *Ukázka spuštění AI Hubu, kontejnerové orchestrace a datového enginu.*
+
 </details>
 
 <details>
 <summary><b>📂 Python Skripty (2 ukázek) - Klikni pro rozbalení</b></summary>
 
 - **CLI Analýza RAM (scripts/monitor_sluzeb.py):**
+
   [![Demo](https://img.youtube.com/vi/V-Lv1OOfGRc/mqdefault.jpg)](https://youtu.be/V-Lv1OOfGRc)
 
 - **Systémová diagnostika (scripts/ark_sys_health.py):**
+
   [![Demo](https://img.youtube.com/vi/_V8-E2RFi0w/mqdefault.jpg)](https://youtu.be/_V8-E2RFi0w)
 
 </details>
@@ -56,13 +58,19 @@ homelab-devops-portfolio/
 <details>
 <summary><b>📂 Ansible Role (1 ukázek) - Klikni pro rozbalení</b></summary>
 
-- **Modularizované Ansible role pro Podman kontejnerizaci:** ⏳ *Připravuje se*
+- **Modularizované Ansible role pro Podman kontejnerizaci:**
+
+  [![Demo](https://img.youtube.com/vi/SEM_DAL_ID_ANSIBLE/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_ANSIBLE)
+
 </details>
 
 <details>
 <summary><b>📂 PHP Kód (1 ukázek) - Klikni pro rozbalení</b></summary>
 
-- **Control Plane Dashboard & Správa klientů:** ⏳ *Připravuje se*
+- **Control Plane Dashboard & Správa klientů:**
+
+  [![Demo](https://img.youtube.com/vi/SEM_DAL_ID_PHP_1/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_PHP_1)
+
 </details>
 
 <!-- VIDEOS_END -->
