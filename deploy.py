@@ -2,12 +2,11 @@
 import subprocess
 import sys
 import re
-import json
 import hashlib
 from datetime import datetime
 from pathlib import Path
 
-# Seznam vzorů pro detekci citlivých dat a parametrů
+# Seznam cca 10+ vzorů pro detekci citlivých dat a parametrů
 SENSITIVE_PATTERNS = [
     r"BEGIN\s+PRIVATE\s+KEY",                     # 1. SSH / TLS Privátní klíče
     r"api[_-]?key\s*=\s*['\"].+['\"]",             # 2. API klíče
@@ -37,8 +36,8 @@ def check_security():
     untracked_content = ""
     if untracked:
         for f in untracked.splitlines():
-            # Nechceme kontrolovat konfigurační a správcovské soubory
-            if f in ["deploy.py", "verify.py", "videos.json", "manifest.sha256"] or f.startswith(".git"):
+            # Nechceme kontrolovat samotný deploy.py nebo skryté git soubory
+            if f == "deploy.py" or f.startswith(".git"):
                 continue
             try:
                 with open(f, "r", encoding="utf-8", errors="ignore") as file:
@@ -58,72 +57,7 @@ def check_security():
             
     print("[OK] Bezpečnostní kontrola prošla. Žádné zjevné klíče/hesla nenalezeny.")
     return True
-    
-def update_readme_videos():
-    """Přečte videos.json a vygeneruje README.md pomocí stabilního HTML formátování."""
-    print("[*] Aktualizuji sekci videí v README.md...")
-    json_path = Path("videos.json")
-    readme_path = Path("README.md")
 
-    if not json_path.exists() or not readme_path.exists():
-        print("[INFO] Soubor videos.json nebo README.md nenalezen.")
-        return
-
-    try:
-        videos = json.loads(json_path.read_text(encoding="utf-8"))
-    except Exception as e:
-        print(f"[CHYBA] Nelze parsovat videos.json: {e}")
-        return
-
-    if not videos:
-        print("[INFO] Soubor videos.json je prázdný.")
-        return
-
-    html_lines = []
-
-    # 1. Nejnovější video nahoře
-    latest = videos[0]
-    l_id = latest.get("id")
-    l_title = latest.get("title", "Video ukázka")
-    l_desc = latest.get("description", "Ukázka z reálného provozu a automatizace.")
-    
-    html_lines.append("<details>")
-    html_lines.append(f"<summary><b>🔴 Nejnovější přidaná ukázka: {l_title} (Klikni pro rozbalení)</b></summary>\n")
-    html_lines.append(f"[{l_title}](https://youtu.be/{l_id})")
-    html_lines.append(f"- *{l_desc}*")
-    html_lines.append("</details>\n")
-
-    # 2. Starší / Základní video-ukázky dole v stabilním HTML formátu
-    remaining_videos = videos[1:]
-    if remaining_videos:
-        html_lines.append("<details>")
-        html_lines.append("<summary><b>📂 Starší / Základní video-ukázky (Klikni pro rozbalení)</b></summary><br>\n")
-        
-        for v in remaining_videos:
-            vid_id = v.get("id")
-            title = v.get("title", "Video ukázka")
-            # Použijeme čistý text s tagy, což GitHub parser zpracuje bezchybně
-            html_lines.append(f"<b>{title}</b><br>")
-            html_lines.append(f'<a href="https://youtu.be/{vid_id}"><img src="https://img.youtube.com/vi/{vid_id}/mqdefault.jpg" alt="{title}"></a><br><br>')
-            
-        html_lines.append("</details>\n")
-
-    generated_content = "\n".join(html_lines)
-
-    # Vložení do README.md mezi značky
-    readme_content = readme_path.read_text(encoding="utf-8")
-    start_tag = "<!-- VIDEOS_START -->"
-    end_tag = "<!-- VIDEOS_END -->"
-
-    if start_tag in readme_content and end_tag in readme_content:
-        parts = readme_content.split(start_tag)
-        after_start = parts[1].split(end_tag)[1]
-        new_readme = parts[0] + start_tag + "\n\n" + generated_content + "\n" + end_tag + after_start
-        readme_path.write_text(new_readme, encoding="utf-8")
-        print("[OK] README.md bylo úspěšně aktualizováno.")
-    else:
-        print("[VAROVÁNÍ] Značky pro videa v README.md nebyly nalezeny.")
-        
 def generate_hash_manifest():
     """Automaticky vygeneruje/aktualizuje SHA-256 manifest všech souborů před deployem."""
     print("[*] Generuji aktuální SHA-256 manifest projektových souborů...")
@@ -131,13 +65,15 @@ def generate_hash_manifest():
     manifest_file = Path("manifest.sha256")
     
     ignore_dirs = {".git", "__pycache__", ".venv"}
-    ignore_files = {manifest_file.name, "deploy.py", "verify.py", "videos.json"}
+    ignore_files = {manifest_file.name, "deploy.py", "hash_generator.py"}
 
     manifest_lines = []
     
     for path in sorted(root_dir.glob("**/*")):
+        # Přeskočíme ignorované adresáře
         if any(part in ignore_dirs for part in path.parts):
             continue
+        # Zpracujeme jen soubory
         if path.is_file() and path.name not in ignore_files:
             try:
                 sha256_hash = hashlib.sha256()
@@ -149,62 +85,60 @@ def generate_hash_manifest():
             except Exception as e:
                 print(f"[VAROVÁNÍ] Nelze zahašovat {path}: {e}")
 
+    # Zápis do manifestu
     manifest_file.write_text("\n".join(manifest_lines) + "\n")
     print(f"[OK] Manifest úspěšně aktualizován: {manifest_file.resolve()}")
 
 def main():
     print("=" * 60)
-    print("🚀 AUTOMATICKÝ DEPLOY, VIDEO SYNC & INTEGRITY MGR")
+    print("🚀 AUTOMATICKÝ DEPLOY NA GITHUB & INTEGRITY SYNC")
     print("=" * 60)
 
+    # Zjištění, zda uživatel chce vypnout bezpečnostní kontrolu
     skip_check = "--no-check" in sys.argv or "--skip-security" in sys.argv
     if skip_check:
         print("[⚠️ VAROVÁNÍ] Bezpečnostní kontrola je pro tento běh VYPNUTA (--no-check).")
         print("-" * 60)
 
-    # 1. Bezpečnostní kontrola
-    if not skip_check:
-        if not check_security():
-            print("\n[TIP] Pokud chceš kontrolu jednorázově přeskočit, spuštění proveď příkazem:")
-            print("      python3 deploy.py --no-check\n")
-            sys.exit(1)
-
-    # 2. Aktualizace README.md z videos.json
-    update_readme_videos()
-    print("-" * 60)
-
-    # 3. Generování SHA-256 manifestu
-    generate_hash_manifest()
-    print("-" * 60)
-
-    # 4. Kontrola stavu repozitáře
+    # 1. Kontrola stavu depozitáře
     code, out, _ = run_cmd("git status --porcelain")
     if not out:
-        print("[INFO] Žádné nové změny k odeslání. Vše je aktuální.")
+        print("[INFO] Žádné změny k odeslání. Vše je aktuální.")
         return
 
     print("[*] Detekovány změny v projektu:")
     print(out)
     print("-" * 60)
 
-    # 5. Git add
+    # 2. Bezpečnostní kontrola (pokud není vypnutá)
+    if not skip_check:
+        if not check_security():
+            print("\n[TIP] Pokud chceš kontrolu jednorázově přeskočit, spuštění proveď příkazem:")
+            print("      python3 deploy.py --no-check\n")
+            sys.exit(1)
+
+    # 3. Automatické generování SHA-256 hash manifestu
+    generate_hash_manifest()
+    print("-" * 60)
+
+    # 4. Přidání souborů (včetně nově vygenerovaného manifestu)
     print("[*] Přidávám změny (git add .)...")
     code, _, err = run_cmd("git add .")
     if code != 0:
         print(f"[CHYBA] git add selhal: {err}")
         sys.exit(1)
 
-    # 6. Git commit
+    # 5. Vytvoření commitu s časovým razítkem
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    commit_msg = f"Auto-deploy: Update portfolio, videos & integrity manifest ({now})"
+    commit_msg = f"Update documentation/portfolio & sync integrity manifest ({now})"
     print(f"[*] Vytvářím commit: '{commit_msg}'...")
     
     code, _, err = run_cmd(f'git commit -m "{commit_msg}"')
-    if code != 0 and "nothing to commit" not in err:
+    if code != 0:
         print(f"[CHYBA] git commit selhal: {err}")
         sys.exit(1)
 
-    # 7. Git push
+    # 6. Push na GitHub
     print("[*] Odesílám na GitHub (git push)...")
     code, out, err = run_cmd("git push origin main")
     
