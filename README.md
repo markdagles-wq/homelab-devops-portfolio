@@ -1,203 +1,86 @@
 # 🛠️ HomeLab, System Administration & Infrastructure Portfolio
 
-**Jméno a Příjmení:** Václav Novotný  
-📍 **Kontakt:** rewol@post.cz | +420 737 906 400    
-🔗 **GitHub:** https://github.com/markdagles-wq/homelab-devops-portfolio
+**Václav Novotný** | ✉️ rewol@post.cz | 📞 +420 737 906 400 | 🔗 [GitHub Profile](https://github.com/markdagles-wq)
 
 ---
 
-### 🎥 Ukázky z terminálu (Silent Engineering Demos)
+### 🚀 Očekávané novinky & Stav vývoje
+> *Tento repozitář je živý organismus. Pravidelně sem doplňuji nové moduly, skripty a ukázky z reálného provozu mých Debian serverů.*
 
-> *Všechna videa jsou koncipována jako tiché vizuální demonstrace funkčnosti kódu s úvodními titulky.*
-
-#### 1. Architektura & AI Hub Sandbox
-[![Project Echo Demo](https://img.youtube.com/vi/ID_VIDEA_1/maxresdefault.jpg)](https://youtu.be/ID_VIDEA_1)
-*▶️ Kliknutím přehrajete ukázku spuštění AI Hubu a orchestrace*
+* **Aktuální verze:** Stabilní jádro kontejnerové orchestrace a bezpečnostních bran.
+* **Připravuji v nejbližších dnech:** Rozšíření Ansible rolí o automatický backup management a integraci s novým monitoring dashboardem. *(Sledujte commity!)*
 
 ---
 
-#### 2. CLI Analýza & Správa procesů: `scripts/monitor_sluzeb.py`
-[![Monitor služeb Demo](https://img.youtube.com/vi/watch?v=V-Lv1OOfGRc/maxresdefault.jpg)](https://youtu.be/watch?v=V-Lv1OOfGRc)
-*▶️ Kliknutím přehrajete demonstraci analýzy RAM a interaktivního úklidu*
+### 🎥 Živé video-ukázky z terminálu (Silent Demos)
+
+<details>
+<summary><b>🔴 Nejnovější přidaná ukázka: AI Hub Sandbox & Orchestrace (Klikni pro rozbalení)</b></summary>
+
+[![Project Echo Demo](https://img.youtube.com/vi/ID_VIDEA_1/mqdefault.jpg)](https://youtu.be/ID_VIDEA_1)
+* *Ukázka spuštění AI Hubu, kontejnerové orchestrace a datového enginu.*
+</details>
+
+<details>
+<summary><b>📂 Starší / Základní video-ukázky (Klikni pro rozbalení)</b></summary>
+
+* **CLI Analýza RAM (`scripts/monitor_sluzeb.py`):**
+  [![Monitor služeb Demo](https://img.youtube.com/vi/V-Lv1OOfGRc/mqdefault.jpg)](https://youtu.be/V-Lv1OOfGRc)
+* **Systémová diagnostika (`scripts/ark_sys_health.py`):**
+  [![Sys Health Demo](https://img.youtube.com/vi/_V8-E2RFi0w/mqdefault.jpg)](https://youtu.be/_V8-E2RFi0w)
+</details>
 
 ---
 
-#### 3. Systémová diagnostika: `scripts/ark_sys_health.py`
-[![Sys Health Demo](https://img.youtube.com/vi/watch?v=_V8-E2RFi0w/maxresdefault.jpg)](https://youtu.be/watch?v=_V8-E2RFi0w)
-*▶️ Kliknutím přehrajete reálnou diagnostiku a health-check systému*
+### 📂 Architektura v kostce (Struktura projektu)
 
----
-
-### 📂 Struktura tohoto repozitáře a tiché video-ukázky
+<details>
+<summary><b>🗂️ Zobrazit stromovou strukturu repozitáře (Klikni pro rozbalení)</b></summary>
 
 ```text
 homelab-devops-portfolio/
-├── README.md                      <-- Hlavní dokumentace a portfolio
-├── deploy.py                      <-- Automatický deploy skript s vestavěnou bezpečnostní bránou
-├── .gitignore                     <-- Vymezení ignorovaných a citlivých souborů
-├── ai_hub/                        <-- AI Sandbox & Podman orchestrace
-│   ├── run.py                     <-- Hlavní Python orchestrátor (cleanup, build, porty)
-│   └── core/
-│       └── engines/
-│           ├── __init__.py
-│           └── finance_engine.py  <-- Pandas Excel parser a generátor metrik
-├── ansible/                       <-- Infrastructure as Code (Ansible)
-│   ├── site.yml                   <-- Hlavní orchestrace a přiřazení rolí
-│   └── role/
-│       └── roles_podman/
-│           ├── role_client_containers/
-│           │   ├── tasks/
-│           │   │   └── main.yml   <-- Úlohy pro klientské kontejnery
-│           │   └── templates/
-│           │       ├── docker-compose-db.yml.j2
-│           │       ├── docker-compose-lemp.yml.j2
-│           │       ├── docker-compose-node.yml.j2
-│           │       └── docker-compose-python.yml.j2
-│           ├── role_control_plane/
-│           │   ├── files/
-│           │   │   └── control_plane.py <-- Flask dashboard a správa klientů
-│           │   └── tasks/
-│           │       └── main.yml   <-- Instalace a systemd služba pro control plane
-│           └── role_traefik_gateway/
-│               └── tasks/
-│                   └── main.yml   <-- Nasazení Traefik proxy a sítí
-└── scripts/                       <-- Vlastní systémové utility
-    ├── monitor_sluzeb.py          <-- CLI analýza RAM, procesů a interaktivní úklid
-    └── ark_sys_health.py          <-- Pokročilý systémový health-check & diagnostika
-    
-🎯 O mně & Moje IT filozofie
+├── README.md               <-- Dokumentace a portfolio
+├── deploy.py               <-- Auto-deploy s bezpečnostní bránou a generátorem hashů
+├── manifest.sha256         <-- Automatický kryptografický manifest integrity
+├── ai_hub/                 <-- Podman orchestrace & AI Sandbox (Qwen + Phi-4 Guard)
+├── ansible/                <-- IaC: Site.yml a modulární role (Podman, Traefik, Control Plane)
+└── scripts/                <-- Systemd/CLI utility (monitor_sluzeb.py, ark_sys_health.py)
 
-Nepocházím z akademického IT prostředí ani nemám roky korporátní praxe.
-Vše, co umím, jsem si sám postavil, odlaďoval a vydřel v HomeLabu.
+### 💡 Inženýrský přístup & Klíčové pilíře
 
-Žádné bezhlavé klikání:
-Chci do hloubky rozumět fungování OS,
-efektivní alokaci HW zdrojů,
-zabezpečení dat na úrovni disků
-a kompletní automatizaci.
+* 🔒 **Security & Supply Chain:** Vlastní `deploy.py` (sken citlivých dat před pushem) + automatický `manifest.sha256` pro ověření integrity.
+* ⚡ **Performance & Kernel Tuning:** zRAM (zstd 25 %), RAM optimization a TPM2 + LUKS odemykání disků na Debian CLI.
+* 📦 **IaC & Orchestrace:** Modularizované Ansible role, bezrootový Podman (`/opt/clients/`) a reverzní proxy Traefik.
 
-Architektura nad syntaxí:
-AI využívám jako efektivní nástroj pro psaní kódu (rychlé ruce),
-ale celkovou architekturu, síťový design
-a logiku systému navrhuji a řídím sám.
+<details>
+<summary><b>🛠️ Zobrazit kompletní technickou specifikaci & detaily konfigurace</b></summary>
 
-Minimalismus & Nízká režie:
-Preferuji čistý Debian CLI.
-Aplikace izoluji do venv a bezrootových kontejnerů.
-I na 32 GB RAM šetřím zdroje (Podman místo Dockeru,
-podtaktování CPU pro úsporu energie, žádný balast).
+#### Hardware, Kernel & Bezpečnost
+* **Hardware Tuning:** Běží na HP EliteDesk G4 / ThinkPad, fyzický tuning a BIOS hardening.
+* **LUKS + TPM2 (Clevis):** Automatické bezpečné odemykání NVMe disků vázané na TPM2 (PCR 7).
+* **Power Management:** Systemd služba pro řízení Intel RAPL Power Limitů a úsporu wattů.
+* **RAM Optimization:** Přechod z diskového swapu na zRAM (zstd 25 %), využití tmpfs pro `/tmp`.
 
-Bezpečnost na prvním místě:
-Šifrování disků vázané na TPM2 čip,
-hardening SSH, izolace sítí a vlastní automatické kontroly kódu před pushi.
+#### Infrastructure as Code & Orchestrace
+* **Ansible Role:** Modularizovaná struktura pro bezpečný deployment (`site.yml`).
+* **SSH Hardening:** Vypnutí hesel, změna portů, správa SSH klíčů.
+* **Podman Compose:** Izolované klientské kontejnery v `/opt/clients/` s právy (0750).
+* **Traefik Gateway:** Automatizovaná reverzní proxy a správa klientských subdomén.
 
-🖥️ 1. Hardware Tuning, Kernel & Bezpečnost
+#### Integrity & Deploy Automation
+* **`deploy.py`:** Python utilita pro skenování diffu a zamezení úniku klíčů/hesel.
+* **Integrity Manifest:** SHA-256 hashovací brána garantující neporušenost souborů při přenosu.
 
-(Debian / HP EliteDesk G4 / ThinkPad)
+</details>
 
-Hardware & BIOS:
-Fyzická údržba (přepastování CPU),
-zamykání BIOSu heslem, správná alokace zdrojů.
+---
 
-LUKS + TPM2 Šifrování (Clevis):
-Automatické bezpečné odemykání NVMe disků
-vázané na TPM2 čip (PCR 7) s konfigurací crypttab
-a obnovou initramfs. (Kód předvedu na pohovoru)
+### 🔒 Poznámka & Kontakt
 
-Power Management & Limity:
-Vlastní systemd služba pro zamykání Intel RAPL Power Limitů,
-governor schedutil a zastropování CPU na max 80 % pro úsporu wattů.
+> *Zveřejněné skripty slouží jako demonstrace mého stylu práce, kontejnerizace a automatizace. Kompletní produkční role a citlivé konfigurace jsou z bezpečnostních důvodů neveřejné.*
+> 
+> *Rád vám celou architekturu detailně představím a vysvětlím při osobním pohovoru.*
 
-RAM & Memory Management:
-Odstranění diskového LVM swapu a přechod na zRAM (zstd 25 %).
-Využití /tmp jako tmpfs přímo v RAM.
-Optimalizace kernelu pro AI zátěž přes 2MB Hugepages
-a tuning vfs_cache_pressure.
-
-I/O Schedulery:
-Cílené nastavení schedulerů (deadline pro NVMe, none pro SSD).
-
-🤖 2. Infrastructure as Code & Orchestrace
-
-(Ansible & Podman)
-
-Modularizované role (ansible/site.yml):
-Dynamická distribuce konfigurace podle typu stroje (hosts / facts).
-
-SSH Hardening:
-Vypnutí heslového přihlašování, změna portů, správa SSH klíčů.
-
-Automation & Container Management:
-Automatické nasazování klientských prostředí přes podman-compose
-do adresářové struktury /opt/clients/ s právy (0750 / 0640).
-
-Traefik Gateway & Control Plane:
-Automatizované nasazování reverzní proxy Traefik
-a správa klientských subdomén.
-
-Self-Healing / Log Monitoring:
-Vyhodnocování stavu kontejnerů (čtení logů přes tail -n 20)
-s automatickým restartem v případě selhání.
-
-🛡️ 3. Supply Chain Security & Automatický Deploy (deploy.py)
-
-Pro zajištění maximální bezpečnosti a eliminaci lidských chyb při publikaci kódu
-využívám vlastní Python utilitu deploy.py s vestavěnou bezpečnostní bránou.
-
-    Lokální Security Check: Skript před každým commitem a pushem prověří diff změn
-    i nové soubory proti pokročilým regulárním výrazům.
-
-    Ochrana před únikem: Pokud detekuje citlivá data (hesla, API klíče, soukromé klíče,
-    databázové řetězce), okamžitě zablokuje nasazení.
-
-    Flexibilita: Podporuje přepínač --no-check pro jednorázové obcházení kontroly.
-    
-🚀 4. Projekt: Finance AI Hub & Podman Sandbox
-
-Prototyp kontejnerizovaného finančního autopilota:
-
-Runtime & Izolace (ai_hub/run.py):
-Běží v Podmanu s orchestrací (cleanup, build, volume mounty).
-
-Data Engine (ai_hub/core/engines/finance_engine.py):
-Parsování a čištění dat z Excel výkazů (finance.xlsx)
-pomocí pandas, generování JSON metrik a kontextu pro AI.
-
-AI Engine & Guard Architecture:
-Hlavní AI model (Qwen) na portu 8080 pro finanční analýzu.
-Bezpečnostní Guard model (Phi-4) na portu 8081 pro validaci výstupů.
-PHP API Bridge pro komunikaci rozhraní s backendem.
-
-🌐 5. Síťová architektura, Auditing & Zálohy
-
-Síť & Cloud Evolution:
-Přechod od Nginx proxy k čisté mesh síti přes Tailscale.
-Plánovaný přechod řízení webové prezentace do cloudu přes Terraform.
-
-Emergency Alerting (SMS Bridge):
-Python skript pro kritické notifikace.
-Propojení Debian serveru s Android/Termux zařízením
-přes SSH tunel v Tailscale / ADB fallback pro 100% doručení SMS.
-
-System & Code Audit (ark_sys_health.py):
-Vlastní Python skener pro hloubkovou kontrolu adresářů
-a generování manifestů závislostí.
-
-RAM & Process Monitor (scripts/monitor_sluzeb.py):
-CLI nástroj v Pythonu s barevným rozlišením spotřeby RAM podle procesů
-a detekcí zbytečných služeb s možností ukončení.
-
-🔒 Poznámka k soukromí & Kontakt
-
-Zde zveřejněné skripty a struktury slouží jako demonstrace mého stylu programování,
-kontejnerizace a automatizace. Kompletní produkční Ansible role
-a citlivé konfigurace jsou z autorských důvodů neveřejné.
-
-Rád vám kompletní architekturu předvedu a detailně vysvětlím při osobním pohovoru.
-
-✉️ Email: rewol@post.cz
-
-📞 Telefon: +420 737 906 400
-
-🌐 GitHub Profile: markdagles-wq    
-    
+* ✉️ **Email:** rewol@post.cz
+* 📞 **Telefon:** +420 737 906 400
+* 🔗 **GitHub:** [markdagles-wq](https://github.com/markdagles-wq)
