@@ -60,7 +60,7 @@ def check_security():
     return True
 
 def update_readme_videos():
-    """Přečte videos.json a vygeneruje README.md v původním čistém a dokonalém designu."""
+    """Přečte videos.json a vygeneruje stabilní HTML miniatury pro README.md."""
     print("[*] Aktualizuji sekci videí v README.md...")
     json_path = Path("videos.json")
     readme_path = Path("README.md")
@@ -81,7 +81,7 @@ def update_readme_videos():
 
     html_lines = []
 
-    # 1. První video v JSONu = Hlavní / Nejnovější zvýrazněná ukázka nahoře (původní vzhled)
+    # 1. První video v JSONu = Hlavní / Nejnovější zvýrazněná ukázka nahoře
     latest = videos[0]
     l_id = latest.get("id")
     l_title = latest.get("title", "Video ukázka")
@@ -89,11 +89,13 @@ def update_readme_videos():
     
     html_lines.append("<details>")
     html_lines.append(f"<summary><b>🔴 Nejnovější přidaná ukázka: {l_title} (Klikni pro rozbalení)</b></summary>\n")
-    html_lines.append(f"[![Project Echo Demo](https://img.youtube.com/vi/{l_id}/mqdefault.jpg)](https://youtu.be/{l_id})")
-    html_lines.append(f"- *{l_desc}*\n")
+    html_lines.append(f'<p align="center">')
+    html_lines.append(f'<a href="https://youtu.be/{l_id}"><img src="https://img.youtube.com/vi/{l_id}/mqdefault.jpg" alt="{l_title}"></a>')
+    html_lines.append(f'</p>')
+    html_lines.append(f'- *{l_desc}*')
     html_lines.append("</details>\n")
 
-    # 2. Zbývající videa seskupíme podle kategorií v původním čistém formátu
+    # 2. Zbývající videa seskupíme podle kategorií
     remaining_videos = videos[1:]
     if remaining_videos:
         categories = {}
@@ -111,8 +113,8 @@ def update_readme_videos():
             for v in cat_videos:
                 vid_id = v.get("id")
                 title = v.get("title", "Video ukázka")
-                html_lines.append(f"- **{title}:**\n")
-                html_lines.append(f"  [![Demo](https://img.youtube.com/vi/{vid_id}/mqdefault.jpg)](https://youtu.be/{vid_id})\n")
+                html_lines.append(f"- **{title}:**<br>")
+                html_lines.append(f'  <a href="https://youtu.be/{vid_id}"><img src="https://img.youtube.com/vi/{vid_id}/mqdefault.jpg" alt="{title}"></a>\n')
                 
             html_lines.append("</details>\n")
 
@@ -128,7 +130,7 @@ def update_readme_videos():
         after_start = parts[1].split(end_tag)[1]
         new_readme = parts[0] + start_tag + "\n\n" + generated_content + "\n" + end_tag + after_start
         readme_path.write_text(new_readme, encoding="utf-8")
-        print("[OK] README.md bylo úspěšně aktualizováno do původního designu.")
+        print("[OK] README.md bylo úspěšně aktualizováno.")
     else:
         print("[VAROVÁNÍ] Značky pro videa v README.md nebyly nalezeny.")
 

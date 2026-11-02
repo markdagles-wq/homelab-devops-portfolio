@@ -37,39 +37,36 @@ homelab-devops-portfolio/
 <details>
 <summary><b>🔴 Nejnovější přidaná ukázka: AI Hub Sandbox & Orchestrace (Klikni pro rozbalení)</b></summary>
 
-[![Project Echo Demo](https://img.youtube.com/vi/ID_NOVEHO_VIDEA/mqdefault.jpg)](https://youtu.be/ID_NOVEHO_VIDEA)
+<p align="center">
+<a href="https://youtu.be/ID_NOVEHO_VIDEA"><img src="https://img.youtube.com/vi/ID_NOVEHO_VIDEA/mqdefault.jpg" alt="AI Hub Sandbox & Orchestrace"></a>
+</p>
 - *Ukázka spuštění AI Hubu, kontejnerové orchestrace a datového enginu.*
-
 </details>
 
 <details>
 <summary><b>📂 Python Skripty (2 ukázek) - Klikni pro rozbalení</b></summary>
 
-- **CLI Analýza RAM (scripts/monitor_sluzeb.py):**
+- **CLI Analýza RAM (scripts/monitor_sluzeb.py):**<br>
+  <a href="https://youtu.be/V-Lv1OOfGRc"><img src="https://img.youtube.com/vi/V-Lv1OOfGRc/mqdefault.jpg" alt="CLI Analýza RAM (scripts/monitor_sluzeb.py)"></a>
 
-  [![Demo](https://img.youtube.com/vi/V-Lv1OOfGRc/mqdefault.jpg)](https://youtu.be/V-Lv1OOfGRc)
-
-- **Systémová diagnostika (scripts/ark_sys_health.py):**
-
-  [![Demo](https://img.youtube.com/vi/_V8-E2RFi0w/mqdefault.jpg)](https://youtu.be/_V8-E2RFi0w)
+- **Systémová diagnostika (scripts/ark_sys_health.py):**<br>
+  <a href="https://youtu.be/_V8-E2RFi0w"><img src="https://img.youtube.com/vi/_V8-E2RFi0w/mqdefault.jpg" alt="Systémová diagnostika (scripts/ark_sys_health.py)"></a>
 
 </details>
 
 <details>
 <summary><b>📂 Ansible Role (1 ukázek) - Klikni pro rozbalení</b></summary>
 
-- **Modularizované Ansible role pro Podman kontejnerizaci:**
-
-  [![Demo](https://img.youtube.com/vi/SEM_DAL_ID_ANSIBLE/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_ANSIBLE)
+- **Modularizované Ansible role pro Podman kontejnerizaci:**<br>
+  <a href="https://youtu.be/SEM_DAL_ID_ANSIBLE"><img src="https://img.youtube.com/vi/SEM_DAL_ID_ANSIBLE/mqdefault.jpg" alt="Modularizované Ansible role pro Podman kontejnerizaci"></a>
 
 </details>
 
 <details>
 <summary><b>📂 PHP Kód (1 ukázek) - Klikni pro rozbalení</b></summary>
 
-- **Control Plane Dashboard & Správa klientů:**
-
-  [![Demo](https://img.youtube.com/vi/SEM_DAL_ID_PHP_1/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_PHP_1)
+- **Control Plane Dashboard & Správa klientů:**<br>
+  <a href="https://youtu.be/SEM_DAL_ID_PHP_1"><img src="https://img.youtube.com/vi/SEM_DAL_ID_PHP_1/mqdefault.jpg" alt="Control Plane Dashboard & Správa klientů"></a>
 
 </details>
 
