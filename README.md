@@ -39,18 +39,22 @@
 
 ```text
 homelab-devops-portfolio/
-├── README.md               <-- Dokumentace a portfolio
-├── deploy.py               <-- Auto-deploy s bezpečnostní bránou a generátorem hashů
-├── manifest.sha256         <-- Automatický kryptografický manifest integrity
-├── ai_hub/                 <-- Podman orchestrace & AI Sandbox (Qwen + Phi-4 Guard)
-├── ansible/                <-- IaC: Site.yml a modulární role (Podman, Traefik, Control Plane)
-└── scripts/                <-- Systemd/CLI utility (monitor_sluzeb.py, ark_sys_health.py)
+├── README.md              <-- Dokumentace a portfolio
+├── deploy.py              <-- Auto-deploy s bezpečnostní bránou a generátorem hashů
+├── verify.py              <-- Skript pro ověření kryptografické integrity podle manifestu
+├── manifest.sha256        <-- Automatický kryptografický manifest integrity
+├── ai_hub/                <-- Podman orchestrace & AI Sandbox (Qwen + Phi-4 Guard)
+├── ansible/               <-- IaC: Site.yml a modulární role (Podman, Traefik, Control Plane)
+└── scripts/               <-- Systemd/CLI utility (monitor_sluzeb.py, ark_sys_health.py)
 
 ### 💡 Inženýrský přístup & Klíčové pilíře
 
-* 🔒 **Security & Supply Chain:** Vlastní `deploy.py` (sken citlivých dat před pushem) + automatický `manifest.sha256` pro ověření integrity.
-* ⚡ **Performance & Kernel Tuning:** zRAM (zstd 25 %), RAM optimization a TPM2 + LUKS odemykání disků na Debian CLI.
-* 📦 **IaC & Orchestrace:** Modularizované Ansible role, bezrootový Podman (`/opt/clients/`) a reverzní proxy Traefik.
+* 🔒 **Security & Supply Chain:** Vlastní `deploy.py` (sken citlivých dat před pushem) 
+      + automatický `manifest.sha256` pro ověření integrity.
+* ⚡ **Performance & Kernel Tuning:** zRAM (zstd 25 %), RAM optimization a TPM2 
+      + LUKS odemykání disků na Debian CLI.
+* 📦 **IaC & Orchestrace:** Modularizované Ansible role, bezrootový Podman (`/opt/clients/`) 
+      + reverzní proxy Traefik.
 
 <details>
 <summary><b>🛠️ Zobrazit kompletní technickou specifikaci & detaily konfigurace</b></summary>
@@ -77,7 +81,8 @@ homelab-devops-portfolio/
 
 ### 🔒 Poznámka & Kontakt
 
-> *Zveřejněné skripty slouží jako demonstrace mého stylu práce, kontejnerizace a automatizace. Kompletní produkční role a citlivé konfigurace jsou z bezpečnostních důvodů neveřejné.*
+> *Zveřejněné skripty slouží jako demonstrace mého stylu práce, kontejnerizace a automatizace. 
+   Kompletní produkční role a citlivé konfigurace jsou z bezpečnostních důvodů neveřejné.*
 > 
 > *Rád vám celou architekturu detailně představím a vysvětlím při osobním pohovoru.*
 
