@@ -1,5 +1,11 @@
 [
   {
+    "id": "ID_NOVEHO_VIDEA",
+    "title": "AI Hub Sandbox & Orchestrace",
+    "description": "Ukázka spuštění AI Hubu, kontejnerové orchestrace a datového enginu.",
+    "category": "Hlavní"
+  },
+  {
     "id": "V-Lv1OOfGRc",
     "title": "CLI Analýza RAM (scripts/monitor_sluzeb.py)",
     "category": "Python Skripty"
@@ -17,16 +23,6 @@
   {
     "id": "SEM_DAL_ID_PHP_1",
     "title": "Control Plane Dashboard & Správa klientů",
-    "category": "PHP Kód"
-  },
-  {
-    "id": "SEM_DAL_ID_PHP_2",
-    "title": "API Bridge pro komunikaci backendu a lokálního AI",
-    "category": "PHP Kód"
-  },
-  {
-    "id": "SEM_DAL_ID_PHP_3",
-    "title": "Bezpečnostní notifikace a monitoring rozhraní",
     "category": "PHP Kód"
   }
 ]

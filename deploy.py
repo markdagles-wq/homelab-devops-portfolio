@@ -7,7 +7,7 @@ import hashlib
 from datetime import datetime
 from pathlib import Path
 
-# Seznam cca 10+ vzorů pro detekci citlivých dat a parametrů
+# Seznam vzorů pro detekci citlivých dat a parametrů
 SENSITIVE_PATTERNS = [
     r"BEGIN\s+PRIVATE\s+KEY",                     # 1. SSH / TLS Privátní klíče
     r"api[_-]?key\s*=\s*['\"].+['\"]",             # 2. API klíče
@@ -60,8 +60,8 @@ def check_security():
     return True
 
 def update_readme_videos():
-    """Automaticky přečte videos.json, seskupí je podle kategorií a přepíše sekci v README.md."""
-    print("[*] Aktualizuji sekci videí v README.md podle kategorií z videos.json...")
+    """Přečte videos.json, první video dá nahoru jako hlavní novinku a zbytek rozřadí do kategorií."""
+    print("[*] Aktualizuji sekci videí v README.md podle kategorií a novinek z videos.json...")
     json_path = Path("videos.json")
     readme_path = Path("README.md")
 
@@ -75,28 +75,47 @@ def update_readme_videos():
         print(f"[CHYBA] Nelze parsovat videos.json: {e}")
         return
 
-    # Seskupení videí podle kategorií se zachováním pořadí
-    categories = {}
-    for v in videos:
-        cat = v.get("category", "Ostatní")
-        if cat not in categories:
-            categories[cat] = []
-        categories[cat].append(v)
+    if not videos:
+        print("[INFO] Soubor videos.json je prázdný.")
+        return
 
-    # Sestavení přehledného HTML bloku pro README
     html_lines = []
-    for cat, cat_videos in categories.items():
-        html_lines.append(f"<details>")
-        html_lines.append(f"<summary><b>📂 {cat} ({len(cat_videos)} ukázek) - Klikni pro rozbalení</b></summary>\n")
-        
-        for v in cat_videos:
-            vid_id = v.get("id")
-            title = v.get("title", "Video ukázka")
-            html_lines.append(f"* **{title}**")
-            html_lines.append(f"  * [![Miniatura](https://img.youtube.com/vi/{vid_id}/mqdefault.jpg)](https://youtu.be/{vid_id})")
-            html_lines.append(f"  * *[▶️ Sledovat video na YouTube](https://youtu.be/{vid_id})*\n")
+
+    # 1. První video v JSONu = Hlavní / Nejnovější zvýrazněná ukázka nahoře
+    latest = videos[0]
+    l_id = latest.get("id")
+    l_title = latest.get("title", "Video ukázka")
+    l_desc = latest.get("description", "Ukázka z reálného provozu a automatizace.")
+    
+    html_lines.append("<details>")
+    html_lines.append(f'<summary><b>🔴 Nejnovější přidaná ukázka: {l_title} (Klikni pro rozbalení)</b></summary>\n')
+    html_lines.append(f'[![Demo](https://img.youtube.com/vi/{l_id}/mqdefault.jpg)](https://youtu.be/{l_id})')
+    html_lines.append(f'- *{l_desc}*')
+    html_lines.append("</details>\n")
+
+    # 2. Zbývající videa seskupíme podle kategorií
+    remaining_videos = videos[1:]
+    if remaining_videos:
+        categories = {}
+        for v in remaining_videos:
+            cat = v.get("category", "Ostatní ukázky")
+            if cat not in categories:
+                categories[cat] = []
+            categories[cat].append(v)
+
+        for cat_name, cat_videos in categories.items():
+            count = len(cat_videos)
+            html_lines.append("<details>")
+            html_lines.append(f"<summary><b>📂 {cat_name} ({count} ukázek) - Klikni pro rozbalení</b></summary>\n")
             
-        html_lines.append(f"</details>\n")
+            for v in cat_videos:
+                vid_id = v.get("id")
+                title = v.get("title", "Video ukázka")
+                html_lines.append(f"- **{title}**")
+                html_lines.append(f"  [![Miniatura](https://img.youtube.com/vi/{vid_id}/mqdefault.jpg)](https://youtu.be/{vid_id})")
+                html_lines.append(f"  *[▶️ Sledovat video na YouTube](https://youtu.be/{vid_id})*\n")
+                
+            html_lines.append("</details>\n")
 
     generated_content = "\n".join(html_lines)
 
@@ -110,7 +129,7 @@ def update_readme_videos():
         after_start = parts[1].split(end_tag)[1]
         new_readme = parts[0] + start_tag + "\n\n" + generated_content + "\n" + end_tag + after_start
         readme_path.write_text(new_readme, encoding="utf-8")
-        print("[OK] README.md bylo úspěšně aktualizováno o nejnovější roztříděná videa.")
+        print("[OK] README.md bylo úspěšně aktualizováno o videa z videos.json.")
     else:
         print("[VAROVÁNÍ] Značky pro videa v README.md nebyly nalezeny.")
 
@@ -126,10 +145,8 @@ def generate_hash_manifest():
     manifest_lines = []
     
     for path in sorted(root_dir.glob("**/*")):
-        # Přeskočíme ignorované adresáře
         if any(part in ignore_dirs for part in path.parts):
             continue
-        # Zpracujeme jen soubory
         if path.is_file() and path.name not in ignore_files:
             try:
                 sha256_hash = hashlib.sha256()
@@ -141,7 +158,6 @@ def generate_hash_manifest():
             except Exception as e:
                 print(f"[VAROVÁNÍ] Nelze zahašovat {path}: {e}")
 
-    # Zápis do manifestu
     manifest_file.write_text("\n".join(manifest_lines) + "\n")
     print(f"[OK] Manifest úspěšně aktualizován: {manifest_file.resolve()}")
 
@@ -150,28 +166,27 @@ def main():
     print("🚀 AUTOMATICKÝ DEPLOY, VIDEO SYNC & INTEGRITY MGR")
     print("=" * 60)
 
-    # Zjištění, zda uživatel chce vypnout bezpečnostní kontrolu
     skip_check = "--no-check" in sys.argv or "--skip-security" in sys.argv
     if skip_check:
         print("[⚠️ VAROVÁNÍ] Bezpečnostní kontrola je pro tento běh VYPNUTA (--no-check).")
         print("-" * 60)
 
-    # 1. Bezpečnostní kontrola (pokud není vypnutá)
+    # 1. Bezpečnostní kontrola
     if not skip_check:
         if not check_security():
             print("\n[TIP] Pokud chceš kontrolu jednorázově přeskočit, spuštění proveď příkazem:")
             print("      python3 deploy.py --no-check\n")
             sys.exit(1)
 
-    # 2. Automatická aktualizace sekce videí v README.md z videos.json
+    # 2. Aktualizace README.md z videos.json
     update_readme_videos()
     print("-" * 60)
 
-    # 3. Automatické generování SHA-256 hash manifestu (zahrnuje i změněné README)
+    # 3. Generování SHA-256 manifestu
     generate_hash_manifest()
     print("-" * 60)
 
-    # 4. Kontrola stavu depozitáře
+    # 4. Kontrola stavu repozitáře
     code, out, _ = run_cmd("git status --porcelain")
     if not out:
         print("[INFO] Žádné nové změny k odeslání. Vše je aktuální.")
@@ -181,14 +196,14 @@ def main():
     print(out)
     print("-" * 60)
 
-    # 5. Přidání souborů (včetně videos.json, README.md a nového manifestu)
+    # 5. Git add
     print("[*] Přidávám změny (git add .)...")
     code, _, err = run_cmd("git add .")
     if code != 0:
         print(f"[CHYBA] git add selhal: {err}")
         sys.exit(1)
 
-    # 6. Vytvoření commitu s časovým razítkem
+    # 6. Git commit
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     commit_msg = f"Auto-deploy: Update portfolio, videos & integrity manifest ({now})"
     print(f"[*] Vytvářím commit: '{commit_msg}'...")
@@ -198,7 +213,7 @@ def main():
         print(f"[CHYBA] git commit selhal: {err}")
         sys.exit(1)
 
-    # 7. Push na GitHub
+    # 7. Git push
     print("[*] Odesílám na GitHub (git push)...")
     code, out, err = run_cmd("git push origin main")
     

@@ -35,41 +35,40 @@ homelab-devops-portfolio/
 <!-- VIDEOS_START -->
 
 <details>
+<summary><b>🔴 Nejnovější přidaná ukázka: AI Hub Sandbox & Orchestrace (Klikni pro rozbalení)</b></summary>
+
+[![Demo](https://img.youtube.com/vi/ID_NOVEHO_VIDEA/mqdefault.jpg)](https://youtu.be/ID_NOVEHO_VIDEA)
+- *Ukázka spuštění AI Hubu, kontejnerové orchestrace a datového enginu.*
+</details>
+
+<details>
 <summary><b>📂 Python Skripty (2 ukázek) - Klikni pro rozbalení</b></summary>
 
-* **CLI Analýza RAM (scripts/monitor_sluzeb.py)**
-  * [![Miniatura](https://img.youtube.com/vi/V-Lv1OOfGRc/mqdefault.jpg)](https://youtu.be/V-Lv1OOfGRc)
-  * *[▶️ Sledovat video na YouTube](https://youtu.be/V-Lv1OOfGRc)*
+- **CLI Analýza RAM (scripts/monitor_sluzeb.py)**
+  [![Miniatura](https://img.youtube.com/vi/V-Lv1OOfGRc/mqdefault.jpg)](https://youtu.be/V-Lv1OOfGRc)
+  *[▶️ Sledovat video na YouTube](https://youtu.be/V-Lv1OOfGRc)*
 
-* **Systémová diagnostika (scripts/ark_sys_health.py)**
-  * [![Miniatura](https://img.youtube.com/vi/_V8-E2RFi0w/mqdefault.jpg)](https://youtu.be/_V8-E2RFi0w)
-  * *[▶️ Sledovat video na YouTube](https://youtu.be/_V8-E2RFi0w)*
+- **Systémová diagnostika (scripts/ark_sys_health.py)**
+  [![Miniatura](https://img.youtube.com/vi/_V8-E2RFi0w/mqdefault.jpg)](https://youtu.be/_V8-E2RFi0w)
+  *[▶️ Sledovat video na YouTube](https://youtu.be/_V8-E2RFi0w)*
 
 </details>
 
 <details>
 <summary><b>📂 Ansible Role (1 ukázek) - Klikni pro rozbalení</b></summary>
 
-* **Modularizované Ansible role pro Podman kontejnerizaci**
-  * [![Miniatura](https://img.youtube.com/vi/SEM_DAL_ID_ANSIBLE/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_ANSIBLE)
-  * *[▶️ Sledovat video na YouTube](https://youtu.be/SEM_DAL_ID_ANSIBLE)*
+- **Modularizované Ansible role pro Podman kontejnerizaci**
+  [![Miniatura](https://img.youtube.com/vi/SEM_DAL_ID_ANSIBLE/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_ANSIBLE)
+  *[▶️ Sledovat video na YouTube](https://youtu.be/SEM_DAL_ID_ANSIBLE)*
 
 </details>
 
 <details>
-<summary><b>📂 PHP Kód (3 ukázek) - Klikni pro rozbalení</b></summary>
+<summary><b>📂 PHP Kód (1 ukázek) - Klikni pro rozbalení</b></summary>
 
-* **Control Plane Dashboard & Správa klientů**
-  * [![Miniatura](https://img.youtube.com/vi/SEM_DAL_ID_PHP_1/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_PHP_1)
-  * *[▶️ Sledovat video na YouTube](https://youtu.be/SEM_DAL_ID_PHP_1)*
-
-* **API Bridge pro komunikaci backendu a lokálního AI**
-  * [![Miniatura](https://img.youtube.com/vi/SEM_DAL_ID_PHP_2/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_PHP_2)
-  * *[▶️ Sledovat video na YouTube](https://youtu.be/SEM_DAL_ID_PHP_2)*
-
-* **Bezpečnostní notifikace a monitoring rozhraní**
-  * [![Miniatura](https://img.youtube.com/vi/SEM_DAL_ID_PHP_3/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_PHP_3)
-  * *[▶️ Sledovat video na YouTube](https://youtu.be/SEM_DAL_ID_PHP_3)*
+- **Control Plane Dashboard & Správa klientů**
+  [![Miniatura](https://img.youtube.com/vi/SEM_DAL_ID_PHP_1/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_PHP_1)
+  *[▶️ Sledovat video na YouTube](https://youtu.be/SEM_DAL_ID_PHP_1)*
 
 </details>
 
