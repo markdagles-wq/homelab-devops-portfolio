@@ -1,0 +1,23 @@
+[
+  {
+    "id": "ID_NOVEHO_VIDEA",
+    "title": "AI Hub Sandbox & Orchestrace",
+    "description": "Ukázka spuštění AI Hubu, kontejnerové orchestrace a datového enginu."
+  },
+  {
+    "id": "V-Lv1OOfGRc",
+    "title": "CLI Analýza RAM (scripts/monitor_sluzeb.py)"
+  },
+  {
+    "id": "_V8-E2RFi0w",
+    "title": "Systémová diagnostika (scripts/ark_sys_health.py)"
+  },
+  {
+    "id": "SEM_DAL_ID_ANSIBLE",
+    "title": "Modularizované Ansible role pro Podman kontejnerizaci"
+  },
+  {
+    "id": "SEM_DAL_ID_PHP_1",
+    "title": "Control Plane Dashboard & Správa klientů"
+  }
+]
