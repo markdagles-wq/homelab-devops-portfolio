@@ -60,13 +60,13 @@ def check_security():
     return True
 
 def update_readme_videos():
-    """Přečte videos.json a vygeneruje čistý Markdown s miniaturami pro README.md."""
-    print("[*] Aktualizuji sekci videí v README.md podle videos.json...")
+    """Přečte videos.json, zkontroluje platnost ID a bezpečně vygeneruje README.md bez rozbití."""
+    print("[*] Aktualizuji sekci videí v README.md...")
     json_path = Path("videos.json")
     readme_path = Path("README.md")
 
     if not json_path.exists() or not readme_path.exists():
-        print("[INFO] Soubor videos.json nebo README.md nenalezen, přeskakuji auto-generování videí.")
+        print("[INFO] Soubor videos.json nebo README.md nenalezen.")
         return
 
     try:
@@ -81,6 +81,12 @@ def update_readme_videos():
 
     html_lines = []
 
+    # Pomocná funkce pro detekci placeholderů (zda jde o reálné YouTube ID)
+    def is_placeholder(vid_id):
+        if not vid_id or "ID_" in vid_id or "SEM_DAL" in vid_id or len(vid_id) < 5:
+            return True
+        return False
+
     # 1. První video v JSONu = Hlavní / Nejnovější zvýrazněná ukázka nahoře
     latest = videos[0]
     l_id = latest.get("id")
@@ -89,11 +95,17 @@ def update_readme_videos():
     
     html_lines.append("<details>")
     html_lines.append(f"<summary><b>🔴 Nejnovější přidaná ukázka: {l_title} (Klikni pro rozbalení)</b></summary>\n")
-    html_lines.append(f"[![Demo](https://img.youtube.com/vi/{l_id}/mqdefault.jpg)](https://youtu.be/{l_id})")
-    html_lines.append(f"- *{l_desc}*")
+    
+    if is_placeholder(l_id):
+        html_lines.append(f"> ⏳ **Stav:** *Tato ukázka se připravuje (reálné video bude brzy doplněno).*")
+        html_lines.append(f"- *{l_desc}*")
+    else:
+        html_lines.append(f"[![Demo](https://img.youtube.com/vi/{l_id}/mqdefault.jpg)](https://youtu.be/{l_id})")
+        html_lines.append(f"- *{l_desc}*")
+        
     html_lines.append("</details>\n")
 
-    # 2. Zbývající videa seskupíme podle kategorií v čistém funkčním formátu
+    # 2. Zbývající videa seskupíme podle kategorií
     remaining_videos = videos[1:]
     if remaining_videos:
         categories = {}
@@ -111,8 +123,12 @@ def update_readme_videos():
             for v in cat_videos:
                 vid_id = v.get("id")
                 title = v.get("title", "Video ukázka")
-                html_lines.append(f"- **{title}:**\n")
-                html_lines.append(f"  [![Demo](https://img.youtube.com/vi/{vid_id}/mqdefault.jpg)](https://youtu.be/{vid_id})\n")
+                
+                if is_placeholder(vid_id):
+                    html_lines.append(f"- **{title}:** *[Připravuje se]*\n")
+                else:
+                    html_lines.append(f"- **{title}:**\n")
+                    html_lines.append(f"  [![Demo](https://img.youtube.com/vi/{vid_id}/mqdefault.jpg)](https://youtu.be/{vid_id})\n")
                 
             html_lines.append("</details>\n")
 
@@ -128,7 +144,7 @@ def update_readme_videos():
         after_start = parts[1].split(end_tag)[1]
         new_readme = parts[0] + start_tag + "\n\n" + generated_content + "\n" + end_tag + after_start
         readme_path.write_text(new_readme, encoding="utf-8")
-        print("[OK] README.md bylo úspěšně aktualizováno.")
+        print("[OK] README.md bylo úspěšně aktualizováno s ošetřením placeholderů.")
     else:
         print("[VAROVÁNÍ] Značky pro videa v README.md nebyly nalezeny.")
 
