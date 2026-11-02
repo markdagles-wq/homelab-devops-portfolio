@@ -88,12 +88,12 @@ def update_readme_videos():
     l_desc = latest.get("description", "Ukázka z reálného provozu a automatizace.")
     
     html_lines.append("<details>")
-    html_lines.append(f'<summary><b>🔴 Nejnovější přidaná ukázka: {l_title} (Klikni pro rozbalení)</b></summary>\n')
-    html_lines.append(f'[![Demo](https://img.youtube.com/vi/{l_id}/mqdefault.jpg)](https://youtu.be/{l_id})')
-    html_lines.append(f'- *{l_desc}*')
+    html_lines.append(f"<summary><b>🔴 Nejnovější přidaná ukázka: {l_title} (Klikni pro rozbalení)</b></summary>\n")
+    html_lines.append(f"[![Demo](https://img.youtube.com/vi/{l_id}/mqdefault.jpg)](https://youtu.be/{l_id})")
+    html_lines.append(f"- *{l_desc}*")
     html_lines.append("</details>\n")
 
-    # 2. Zbývající videa seskupíme podle kategorií
+    # 2. Zbývající videa seskupíme podle kategorií (přesně v ověřeném formátu)
     remaining_videos = videos[1:]
     if remaining_videos:
         categories = {}
@@ -111,9 +111,8 @@ def update_readme_videos():
             for v in cat_videos:
                 vid_id = v.get("id")
                 title = v.get("title", "Video ukázka")
-                html_lines.append(f"- **{title}**")
-                html_lines.append(f"  [![Miniatura](https://img.youtube.com/vi/{vid_id}/mqdefault.jpg)](https://youtu.be/{vid_id})")
-                html_lines.append(f"  *[▶️ Sledovat video na YouTube](https://youtu.be/{vid_id})*\n")
+                html_lines.append(f"- **{title}:**\n")
+                html_lines.append(f"  [![Demo](https://img.youtube.com/vi/{vid_id}/mqdefault.jpg)](https://youtu.be/{vid_id})")
                 
             html_lines.append("</details>\n")
 
@@ -129,7 +128,7 @@ def update_readme_videos():
         after_start = parts[1].split(end_tag)[1]
         new_readme = parts[0] + start_tag + "\n\n" + generated_content + "\n" + end_tag + after_start
         readme_path.write_text(new_readme, encoding="utf-8")
-        print("[OK] README.md bylo úspěšně aktualizováno o videa z videos.json.")
+        print("[OK] README.md bylo úspěšně aktualizováno o čisté miniatury.")
     else:
         print("[VAROVÁNÍ] Značky pro videa v README.md nebyly nalezeny.")
 
