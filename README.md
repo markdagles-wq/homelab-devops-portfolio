@@ -28,14 +28,68 @@ homelab-devops-portfolio/
 ├── ansible/               <-- IaC: Site.yml a modulární role (Podman, Traefik, Control Plane)
 └── scripts/               <-- Systemd/CLI utility (monitor_sluzeb.py, ark_sys_health.py)
 
-🎥 Živé video-ukázky z terminálu (Auto-updated Portfolio)
+---
+
+### 🎥 Živé video-ukázky z terminálu (Auto-updated Portfolio)
+
+<!-- VIDEOS_START -->
+
+<details>
+<summary><b>📂 Python Skripty (2 ukázek) - Klikni pro rozbalení</b></summary>
+
+* **CLI Analýza RAM (scripts/monitor_sluzeb.py)**
+  * [![Miniatura](https://img.youtube.com/vi/V-Lv1OOfGRc/mqdefault.jpg)](https://youtu.be/V-Lv1OOfGRc)
+  * *[▶️ Sledovat video na YouTube](https://youtu.be/V-Lv1OOfGRc)*
+
+* **Systémová diagnostika (scripts/ark_sys_health.py)**
+  * [![Miniatura](https://img.youtube.com/vi/_V8-E2RFi0w/mqdefault.jpg)](https://youtu.be/_V8-E2RFi0w)
+  * *[▶️ Sledovat video na YouTube](https://youtu.be/_V8-E2RFi0w)*
+
+</details>
+
+<details>
+<summary><b>📂 Ansible Role (1 ukázek) - Klikni pro rozbalení</b></summary>
+
+* **Modularizované Ansible role pro Podman kontejnerizaci**
+  * [![Miniatura](https://img.youtube.com/vi/SEM_DAL_ID_ANSIBLE/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_ANSIBLE)
+  * *[▶️ Sledovat video na YouTube](https://youtu.be/SEM_DAL_ID_ANSIBLE)*
+
+</details>
+
+<details>
+<summary><b>📂 PHP Kód (3 ukázek) - Klikni pro rozbalení</b></summary>
+
+* **Control Plane Dashboard & Správa klientů**
+  * [![Miniatura](https://img.youtube.com/vi/SEM_DAL_ID_PHP_1/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_PHP_1)
+  * *[▶️ Sledovat video na YouTube](https://youtu.be/SEM_DAL_ID_PHP_1)*
+
+* **API Bridge pro komunikaci backendu a lokálního AI**
+  * [![Miniatura](https://img.youtube.com/vi/SEM_DAL_ID_PHP_2/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_PHP_2)
+  * *[▶️ Sledovat video na YouTube](https://youtu.be/SEM_DAL_ID_PHP_2)*
+
+* **Bezpečnostní notifikace a monitoring rozhraní**
+  * [![Miniatura](https://img.youtube.com/vi/SEM_DAL_ID_PHP_3/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_PHP_3)
+  * *[▶️ Sledovat video na YouTube](https://youtu.be/SEM_DAL_ID_PHP_3)*
+
+</details>
+
+<!-- VIDEOS_END -->
+
+---
+
 💡 Inženýrský přístup & Klíčové pilíře
 
-    🔒 Security & Supply Chain: Vlastní deploy.py (sken citlivých dat před pushem) + automatický manifest.sha256 pro ověření integrity.
+    🔒 Security & Supply Chain: Vlastní deploy.py (sken citlivých dat před pushem) + automatický 
+    
+    manifest.sha256 pro ověření integrity.
 
-    ⚡ Performance & Kernel Tuning: zRAM (zstd 25 %), RAM optimization a TPM2 + LUKS odemykání disků na Debian CLI.
+    ⚡ Performance & Kernel Tuning: zRAM (zstd 25 %), RAM optimization a TPM2 + LUKS odemykání 
+    
+    disků na Debian CLI.
 
-    📦 IaC & Orchestrace: Modularizované Ansible role, bezrootový Podman (/opt/clients/) a reverzní proxy Traefik.
+    📦 IaC & Orchestrace: Modularizované Ansible role, bezrootový Podman (/opt/clients/) a 
+    
+    reverzní proxy Traefik.
 
 Hardware, Kernel & Bezpečnost
 
@@ -65,9 +119,11 @@ Integrity & Deploy Automation
 
 🔒 Poznámka & Kontakt
 
-    Zveřejněné skripty slouží jako demonstrace mého stylu práce, kontejnerizace a automatizace. Kompletní produkční role a citlivé konfigurace 
+    Zveřejněné skripty slouží jako demonstrace mého stylu práce, kontejnerizace a automatizace.
     
-    jsou z bezpečnostních důvodů neveřejné. Rád vám celou architekturu detailně představím a vysvětlím při osobním pohovoru.
+    Kompletní produkční role a citlivé konfigurace jsou z bezpečnostních důvodů neveřejné. 
+    
+    Rád vám celou architekturu detailně představím a vysvětlím při osobním pohovoru.
 
     ✉️ Email: rewol@post.cz
 
