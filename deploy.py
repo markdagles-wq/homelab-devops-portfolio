@@ -58,9 +58,9 @@ def check_security():
             
     print("[OK] Bezpečnostní kontrola prošla. Žádné zjevné klíče/hesla nenalezeny.")
     return True
-
+    
 def update_readme_videos():
-    """Přečte videos.json a bezpečně vygeneruje README.md bez chyb v zobrazení miniatur."""
+    """Přečte videos.json a vygeneruje README.md s čistou strukturou bez rozbitých mezer."""
     print("[*] Aktualizuji sekci videí v README.md...")
     json_path = Path("videos.json")
     readme_path = Path("README.md")
@@ -93,7 +93,7 @@ def update_readme_videos():
     html_lines.append(f"- *{l_desc}*")
     html_lines.append("</details>\n")
 
-    # 2. Starší / Základní video-ukázky dole v jedné roletce
+    # 2. Starší / Základní video-ukázky dole
     remaining_videos = videos[1:]
     if remaining_videos:
         html_lines.append("<details>")
@@ -102,8 +102,8 @@ def update_readme_videos():
         for v in remaining_videos:
             vid_id = v.get("id")
             title = v.get("title", "Video ukázka")
-            # Tady generujeme název a hned na dalším řádku bez mezer miniaturu
-            html_lines.append(f"- **{title}:**")
+            # Tady vynecháme odrážku u obrázku, dám ho přímo pod název jako čistý řádek
+            html_lines.append(f"- **{title}**")
             html_lines.append(f"  [![Demo](https://img.youtube.com/vi/{vid_id}/mqdefault.jpg)](https://youtu.be/{vid_id})\n")
             
         html_lines.append("</details>\n")
@@ -123,6 +123,7 @@ def update_readme_videos():
         print("[OK] README.md bylo úspěšně aktualizováno.")
     else:
         print("[VAROVÁNÍ] Značky pro videa v README.md nebyly nalezeny.")
+        
 def generate_hash_manifest():
     """Automaticky vygeneruje/aktualizuje SHA-256 manifest všech souborů před deployem."""
     print("[*] Generuji aktuální SHA-256 manifest projektových souborů...")
