@@ -1,4 +1,4 @@
-# Citlivé soubory a klíče
+# Citlivé soubory, klíče a testovací data
 *.env
 *.pem
 *.key
@@ -11,3 +11,7 @@ config.private.yml
 *.log
 __pycache__/
 .DS_Store
+
+# Lokální IDE konfigurace (VS Code / PyCharm)
+.vscode/
+.idea/
