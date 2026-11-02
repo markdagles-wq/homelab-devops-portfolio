@@ -36,36 +36,40 @@ homelab-devops-portfolio/
 
 <details>
 <summary><b>🔴 Nejnovější přidaná ukázka: AI Hub Sandbox & Orchestrace (Klikni pro rozbalení)</b></summary>
-
-[![Demo](https://img.youtube.com/vi/ID_NOVEHO_VIDEA/mqdefault.jpg)](https://youtu.be/ID_NOVEHO_VIDEA)
-- *Ukázka spuštění AI Hubu, kontejnerové orchestrace a datového enginu.*
+<p>
+<a href="https://youtu.be/ID_NOVEHO_VIDEA"><img src="https://img.youtube.com/vi/ID_NOVEHO_VIDEA/mqdefault.jpg" alt="AI Hub Sandbox & Orchestrace"></a><br>
+<em>Ukázka spuštění AI Hubu, kontejnerové orchestrace a datového enginu.</em>
+</p>
 </details>
 
 <details>
 <summary><b>📂 Python Skripty (2 ukázek) - Klikni pro rozbalení</b></summary>
-
-- **CLI Analýza RAM (scripts/monitor_sluzeb.py):**
-
-  [![Demo](https://img.youtube.com/vi/V-Lv1OOfGRc/mqdefault.jpg)](https://youtu.be/V-Lv1OOfGRc)
-- **Systémová diagnostika (scripts/ark_sys_health.py):**
-
-  [![Demo](https://img.youtube.com/vi/_V8-E2RFi0w/mqdefault.jpg)](https://youtu.be/_V8-E2RFi0w)
+<p>
+<b>CLI Analýza RAM (scripts/monitor_sluzeb.py)</b><br>
+<a href="https://youtu.be/V-Lv1OOfGRc"><img src="https://img.youtube.com/vi/V-Lv1OOfGRc/mqdefault.jpg" alt="CLI Analýza RAM (scripts/monitor_sluzeb.py)"></a><br>
+<a href="https://youtu.be/V-Lv1OOfGRc">▶️ Sledovat video na YouTube</a><br><br>
+<b>Systémová diagnostika (scripts/ark_sys_health.py)</b><br>
+<a href="https://youtu.be/_V8-E2RFi0w"><img src="https://img.youtube.com/vi/_V8-E2RFi0w/mqdefault.jpg" alt="Systémová diagnostika (scripts/ark_sys_health.py)"></a><br>
+<a href="https://youtu.be/_V8-E2RFi0w">▶️ Sledovat video na YouTube</a><br><br>
+</p>
 </details>
 
 <details>
 <summary><b>📂 Ansible Role (1 ukázek) - Klikni pro rozbalení</b></summary>
-
-- **Modularizované Ansible role pro Podman kontejnerizaci:**
-
-  [![Demo](https://img.youtube.com/vi/SEM_DAL_ID_ANSIBLE/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_ANSIBLE)
+<p>
+<b>Modularizované Ansible role pro Podman kontejnerizaci</b><br>
+<a href="https://youtu.be/SEM_DAL_ID_ANSIBLE"><img src="https://img.youtube.com/vi/SEM_DAL_ID_ANSIBLE/mqdefault.jpg" alt="Modularizované Ansible role pro Podman kontejnerizaci"></a><br>
+<a href="https://youtu.be/SEM_DAL_ID_ANSIBLE">▶️ Sledovat video na YouTube</a><br><br>
+</p>
 </details>
 
 <details>
 <summary><b>📂 PHP Kód (1 ukázek) - Klikni pro rozbalení</b></summary>
-
-- **Control Plane Dashboard & Správa klientů:**
-
-  [![Demo](https://img.youtube.com/vi/SEM_DAL_ID_PHP_1/mqdefault.jpg)](https://youtu.be/SEM_DAL_ID_PHP_1)
+<p>
+<b>Control Plane Dashboard & Správa klientů</b><br>
+<a href="https://youtu.be/SEM_DAL_ID_PHP_1"><img src="https://img.youtube.com/vi/SEM_DAL_ID_PHP_1/mqdefault.jpg" alt="Control Plane Dashboard & Správa klientů"></a><br>
+<a href="https://youtu.be/SEM_DAL_ID_PHP_1">▶️ Sledovat video na YouTube</a><br><br>
+</p>
 </details>
 
 <!-- VIDEOS_END -->
