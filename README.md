@@ -1,10 +1,10 @@
-# 🛠️ HomeLab, System Administration & Infrastructure Portfolio
+# ⚙️ HomeLab, System Administration & Infrastructure Portfolio
 
 **Václav Novotný** | ✉️ rewol@post.cz | 📞 +420 737 906 400 | 🔗 [GitHub Profile](https://github.com/markdagles-wq)
 
 ---
 
-### 🚀 Očekávané novinky & Stav vývoje
+### 🛰️ Očekávané novinky & Stav vývoje
 > *Tento repozitář je živý organismus. Pravidelně sem doplňuji nové moduly, skripty a ukázky z reálného provozu mých Debian serverů.*
 
 * **Aktuální verze:** Stabilní jádro kontejnerové orchestrace a bezpečnostních bran.
@@ -15,14 +15,15 @@
 ### 🎥 Živé video-ukázky z terminálu (Silent Demos)
 
 <details>
-<summary><b>🔴 Nejnovější přidaná ukázka: AI Hub Sandbox & Orchestrace (Klikni pro rozbalení)</b></summary>
+<summary><b> 🟢 Nejnovější přidaná ukázka: ARK Enterprise Cockpit & Hardware Orchestration (Klikni pro rozbalení)</b></summary>
 
-[![Project Echo Demo](https://img.youtube.com/vi/ID_VIDEA_1/mqdefault.jpg)](https://youtu.be/ID_VIDEA_1)
-* *Ukázka spuštění AI Hubu, kontejnerové orchestrace a datového enginu.*
+[![ARK TUI Demo](https://img.youtube.com/vi/SEM_ID_ZDE_DOPLN_VY_NEBO_ZATIM_PLACEHOLDER/mqdefault.jpg)](https://youtu.be/SEM_ID)
+- *Živá ukázka TUI kokpitu pro správu RAPL limitů, Lenovo ACPI baterie (80%), NVIDIA telemetrie a GreenOps úspor.*
+
 </details>
 
 <details>
-<summary><b>📂 Starší / Základní video-ukázky (Klikni pro rozbalení)</b></summary>
+<summary><b>🖥️ Starší / Základní video-ukázky (Klikni pro rozbalení)</b></summary>
 
 * **CLI Analýza RAM (`scripts/monitor_sluzeb.py`):**
   [![Monitor služeb Demo](https://img.youtube.com/vi/V-Lv1OOfGRc/mqdefault.jpg)](https://youtu.be/V-Lv1OOfGRc)
@@ -32,10 +33,10 @@
 
 ---
 
-### 📂 Architektura v kostce (Struktura projektu)
+### 🧬 Architektura v kostce (Struktura projektu)
 
 <details>
-<summary><b>🗂️ Zobrazit stromovou strukturu repozitáře (Klikni pro rozbalení)</b></summary>
+<summary><b>📂 Zobrazit stromovou strukturu repozitáře (Klikni pro rozbalení)</b></summary>
 
 ```text
 homelab-devops-portfolio/
@@ -47,15 +48,15 @@ homelab-devops-portfolio/
 ├── ansible/               <-- IaC: Site.yml a modulární role (Podman, Traefik, Control Plane)
 └── scripts/               <-- Systemd/CLI utility (monitor_sluzeb.py, ark_sys_health.py)
 
-### 💡 Inženýrský přístup & Klíčové pilíře
+### 🗃️  Inženýrský přístup & Klíčové pilíře
 
 * 🔒 **Security & Supply Chain:** Vlastní `deploy.py` (sken citlivých dat před pushem) 
       + automatický `manifest.sha256` pro ověření integrity.
 
-* ⚡ **Performance & Kernel Tuning:** zRAM (zstd 25 %), RAM optimization a TPM2 
+* 🔋 **Performance & Kernel Tuning:** zRAM (zstd 25 %), RAM optimization a TPM2 
       + LUKS odemykání disků na Debian CLI.
 
-* 📦 **IaC & Orchestrace:** Modularizované Ansible role, bezrootový Podman (`/opt/clients/`) 
+* ⚡ **IaC & Orchestrace:** Modularizované Ansible role, bezrootový Podman (`/opt/clients/`) 
       + reverzní proxy Traefik.
 
 🛠️ Kompletní technická specifikace & detaily konfigurace
@@ -105,8 +106,7 @@ homelab-devops-portfolio/
 
 ### 🔒 Poznámka & Kontakt
 
-> *Zveřejněné skripty slouží jako demonstrace mého stylu práce, kontejnerizace a automatizace. 
-   Kompletní produkční role a citlivé konfigurace jsou z bezpečnostních důvodů neveřejné.*
+>  *Kompletní produkční role a citlivé konfigurace jsou z bezpečnostních důvodů neveřejné.*
 
 > *Rád vám celou architekturu detailně představím a vysvětlím při osobním pohovoru.*
 
