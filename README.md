@@ -36,7 +36,7 @@
 ### 🧬 Architektura v kostce (Struktura projektu)
 
 <details>
-<summary><b>📂 Zobrazit stromovou strukturu repozitáře (Klikni pro rozbalení)</b></summary>
+<summary><b>🗃️ Zobrazit stromovou strukturu repozitáře (Klikni pro rozbalení)</b></summary>
 
 ```text
 homelab-devops-portfolio/
@@ -48,7 +48,7 @@ homelab-devops-portfolio/
 ├── ansible/               <-- IaC: Site.yml a modulární role (Podman, Traefik, Control Plane)
 └── scripts/               <-- Systemd/CLI utility (monitor_sluzeb.py, ark_sys_health.py)
 
-### 🗃️  Inženýrský přístup & Klíčové pilíře
+###  📂  Inženýrský přístup & Klíčové pilíře
 
 * 🔒 **Security & Supply Chain:** Vlastní `deploy.py` (sken citlivých dat před pushem) 
       + automatický `manifest.sha256` pro ověření integrity.
