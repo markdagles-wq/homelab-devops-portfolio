@@ -17,7 +17,7 @@
 <details>
 <summary><b> 🟢 Nejnovější přidaná ukázka: ARK Enterprise Cockpit & Hardware Orchestration (Klikni pro rozbalení)</b></summary>
 
-[![ARK TUI Demo](https://img.youtube.com/vi/SEM_ID_ZDE_DOPLN_VY_NEBO_ZATIM_PLACEHOLDER/mqdefault.jpg)](https://youtu.be/SEM_ID)
+[![ARK TUI Demo](https://img.youtube.com/vi/SEM_ID_ZDE_DOPLN_VY_NEBO_ZATIM_PLACEHOLDER/mqdefault.jpg)](https://youtu.be/eF7yAbskCuc)
 - *Živá ukázka TUI kokpitu pro správu RAPL limitů, Lenovo ACPI baterie (80%), NVIDIA telemetrie a GreenOps úspor.*
 
 </details>
