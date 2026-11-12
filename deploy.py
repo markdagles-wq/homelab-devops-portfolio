@@ -64,7 +64,7 @@ def generate_hash_manifest():
     manifest_file = Path("manifest.sha256")
     
     ignore_dirs = {".git", "__pycache__", ".venv"}
-    ignore_files = {manifest_file.name, "deploy.py", "hash_generator.py"}
+    ignore_files = {manifest_file.name, "deploy.py", "verify.py", "hash_generator.py"}
 
     manifest_lines = []
     
