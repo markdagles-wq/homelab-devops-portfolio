@@ -1,44 +1,25 @@
-# 1. SSH zabezpečení pro všechny
-- hosts: all:!legion
-  gather_facts: yes
+# =====================================================================
+# VRSTVA: AI Engine, Izolace, Hermes a Kontejnery na HP G4 Serveru
+# =====================================================================
+
+- hosts: hp_g4_server_1
   become: true
   roles:
-    - security_ssh
+    - sys_kernel_ai_tuning       # Hugepages a doladění paměti pro AI
+    - role_user_llama            # Nativní llama-server + Core Pinning + rbash
+    - role_llama_deploy          # Stažení Qwen modelu a ostrá konfigurace služby
+    - role_user_hermes           # Python agent + venv + API brána
+    - role_user_podman           # Rootless kontejnery pro klienty a weby
+    - gitops_enforcer            # Kontrola deklarovaného stavu (třešnička)
+    
   tasks:
-    - include_tasks: roles/security_ssh/tasks/report.yml
+    - name: Ověření, že Llama API žije
+      uri:
+        url: "http://127.0.0.1:8080/health"
+        method: GET
+      register: ai_health
+      ignore_errors: yes
 
-# 2. Nastavení pro moderní stroje (VPN)
-- hosts: admin_stroje:k3s_servery:!legion
-  become: true
-  roles:
-    - base_security
-  tasks:
-    - include_tasks: roles/base_security/tasks/report.yml
-
-# 3. K3s servery - Hardening a Engine
-- hosts: k3s_servery:!legion
-  become: true
-  vars:
-    db_password: "super_secret_database_password_123"  # <-- Tohle tu být nesmí!
-  roles:
-    - 
-    - security_hardening
-  tasks:
-    - include_tasks: 
-    - include_tasks: 
-    - include_tasks: roles/security_hardening/tasks/report.yml
-    - include_role:
-        name: reporter
-
-# 4. Nastavení pro staré stroje (Thinkpad / G4)
-- hosts: stare_stroje:!legion
-  become: true
-  roles:
-    - base_security
-    - role: 
-      vars:
-        power_limit: 25000000
-  tasks:
-    - include_tasks: roles/base_security/tasks/report.yml
-    - include_tasks: 
-
+    - name: Výsledek ověření AI vrstvy
+      debug:
+        msg: "AI Server stav: {{ ai_health.status | default('Nedostupný') }}"

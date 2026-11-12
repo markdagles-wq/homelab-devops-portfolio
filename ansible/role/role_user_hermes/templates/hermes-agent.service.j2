@@ -1,0 +1,23 @@
+[Unit]
+Description=Hermes AI Agent & API Gateway
+After=network.target llama-server.service
+
+[Service]
+Type=simple
+User=hermes
+Group=hermes
+WorkingDirectory=/opt/hermes/app
+ExecStart=/opt/hermes/venv/bin/python main.py
+Restart=always
+RestartSec=5
+StandardOutput=append:/opt/hermes/logs/agent.log
+StandardError=append:/opt/hermes/logs/error.log
+
+# Bezpečnostní sandboxing pro agenta
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/opt/hermes
+
+[Install]
+WantedBy=multi-user.target

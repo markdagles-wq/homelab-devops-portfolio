@@ -1,6 +1,6 @@
 # ⚙️ HomeLab, System Administration & Infrastructure Portfolio
 
-**Václav Novotný** | ✉️ rewol@post.cz | 📞 +420 737 906 400 | 🔗 [GitHub Profile](https://github.com/markdagles-wq)
+**Kontakt:** | ✉️ rewol@post.cz |  🔗 [GitHub Profile](https://github.com/markdagles-wq)
 
 ---
 
@@ -111,5 +111,4 @@ homelab-devops-portfolio/
 > *Rád vám celou architekturu detailně představím a vysvětlím při osobním pohovoru.*
 
 * ✉️ **Email:** rewol@post.cz
-* 📞 **Telefon:** +420 737 906 400
 * 🔗 **GitHub:** [markdagles-wq](https://github.com/markdagles-wq)

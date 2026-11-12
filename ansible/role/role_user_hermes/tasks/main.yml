@@ -1,0 +1,92 @@
+---
+# roles/role_user_hermes/tasks/main.yml
+
+- name: Vytvoření systémového uživatele pro hermes agenta
+  user:
+    name: hermes
+    shell: /bin/bash
+    home: /opt/hermes
+    create_home: yes
+    system: yes
+    state: present
+
+- name: Vytvoření adresářů pro agenta a klíče
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: hermes
+    group: hermes
+    mode: '0750'
+  loop:
+    - /opt/hermes/app
+    - /opt/hermes/config
+    - /opt/hermes/logs
+
+- name: Kopírování zdrojového kódu hermes agenta
+  copy:
+    src: main.py
+    dest: /opt/hermes/app/main.py
+    owner: hermes
+    group: hermes
+    mode: '0644'
+  notify: Reload systemd hermes
+
+- name: Instalace python3 pip a virtualenv pro hermes
+  apt:
+    name:
+      - python3-pip
+      - python3-venv
+      - python3-full
+    state: present
+    update_cache: yes
+
+- name: Vytvoření virtuálního prostředí pro hermes agenta
+  command: python3 -m venv /opt/hermes/venv
+  args:
+    creates: /opt/hermes/venv/bin/python
+
+- name: Nastavení správných práv k venv pro uživatele hermes
+  file:
+    path: /opt/hermes/venv
+    state: directory
+    owner: hermes
+    group: hermes
+    recurse: yes
+
+- name: Vytvoření Systemd služby pro hermes API agenta
+  copy:
+    dest: /etc/systemd/system/hermes-agent.service
+    content: |
+      [Unit]
+      Description=Hermes AI Agent & API Gateway
+      After=network.target llama-server.service
+
+      [Service]
+      Type=simple
+      User=hermes
+      Group=hermes
+      WorkingDirectory=/opt/hermes/app
+      ExecStart=/opt/hermes/venv/bin/python main.py
+      Restart=always
+      RestartSec=5
+      StandardOutput=append:/opt/hermes/logs/agent.log
+      StandardError=append:/opt/hermes/logs/error.log
+
+      # Bezpečnostní sandboxing pro agenta
+      NoNewPrivileges=yes
+      ProtectSystem=strict
+      ProtectHome=yes
+      ReadWritePaths=/opt/hermes
+
+      [Install]
+      WantedBy=multi-user.target
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Reload systemd hermes
+
+- name: Povolení a start hermes služby
+  systemd:
+    name: hermes-agent
+    enabled: yes
+    daemon_reload: yes
